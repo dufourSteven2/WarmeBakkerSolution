@@ -22,7 +22,7 @@ namespace WarmeBakker.Controllers
         // GET: Products
         public async Task<IActionResult> Index()
         {
-            var warmeBakkerContext = _context.Products.Include(p => p.Category);
+            var warmeBakkerContext = _context.Products.Include(p => p.Category);//
             //return View(await warmeBakkerContext.ToListAsync());
             return View(await _context.Products.ToListAsync());
         }
