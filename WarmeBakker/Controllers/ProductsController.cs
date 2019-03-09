@@ -22,7 +22,7 @@ namespace WarmeBakker.Controllers
         // GET: Products
         public async Task<IActionResult> Index()
         {
-            var warmeBakkerContext = _context.Products.Include(p => p.Category);//
+            //var warmeBakkerContext = _context.Products.Include(p => p.Category);//
             //return View(await warmeBakkerContext.ToListAsync());
             return View(await _context.Products.ToListAsync());
         }
@@ -36,7 +36,7 @@ namespace WarmeBakker.Controllers
             }
 
             var product = await _context.Products
-                .Include(p => p.Category)
+                .Include(p => p.Category)     
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (product == null)
             {
@@ -83,7 +83,7 @@ namespace WarmeBakker.Controllers
             {
                 return NotFound();
             }
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id", product.CategoryId);
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id", product.CategoryId); 
             return View(product);
         }
 

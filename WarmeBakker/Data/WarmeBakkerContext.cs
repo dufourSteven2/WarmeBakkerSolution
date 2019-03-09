@@ -24,6 +24,7 @@ namespace WarmeBakker.Data
             
             modelBuilder.Entity<Product>().ToTable("Product");
             modelBuilder.Entity<Category>().ToTable("Category");
+            modelBuilder.Entity<Category>().HasIndex(p => p.Name); /////////////////bijgevoegde lijn voor test
             modelBuilder.Entity<Customer>().ToTable("Customer");
             modelBuilder.Entity<Order>().ToTable("Order");
             modelBuilder.Entity<OrderLine>().ToTable("OrderLine");
