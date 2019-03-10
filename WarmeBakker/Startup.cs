@@ -11,6 +11,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using WarmeBakker.Data;
 using Microsoft.EntityFrameworkCore;
+using AutoMapper;
+using WarmeBakker.Automapper;
 
 namespace WarmeBakker
 {
@@ -26,12 +28,22 @@ namespace WarmeBakker
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
+
+            //services.AddAutoMapper();
+            var config = new AutoMapper.MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile(new AutomapperProfile());
+            });
+            var mapper = config.CreateMapper();
+            services.AddSingleton(mapper);
+
 
             services.AddDbContext<WarmeBakkerContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
