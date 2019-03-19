@@ -25,6 +25,7 @@ namespace WarmeBakker.Controllers
 
         public IActionResult About()
         {
+
             //    IQueryable<CategoryGroup> data =
             //from product in _context.Products
             //group product by student.EnrollmentDate into dateGroup
