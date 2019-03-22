@@ -51,13 +51,13 @@ namespace WarmeBakker.Data
             }
             context.SaveChanges();
 
-           
+
 
 
             var customers = new Customer[]
             {
             new Customer{ Name = "Benny", Address = "Hobbystraat", Nr = 10, City = "Studentenstad", Zipcode = 8000, Country = "Belgie", Email = "Benny@email.com"},
-            
+
             };
             foreach (Customer e in customers)
             {
