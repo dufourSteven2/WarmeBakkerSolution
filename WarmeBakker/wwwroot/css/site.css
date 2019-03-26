@@ -48,3 +48,12 @@ body {
     font-stretch:extra-condensed;
 }
 
+#navigatie-bakkerij {
+    background-color: #A2A1AB;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    background-color: #A2A1AB;
+    font-size: 20px;
+    color: #39383E;
+}
