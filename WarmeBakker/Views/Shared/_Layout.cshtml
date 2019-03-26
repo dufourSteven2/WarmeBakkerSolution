@@ -2,11 +2,12 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" user-scalable=false; />
     <title>@ViewData["Title"] - Warme Bakker</title>
 
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link href="~/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
         <link rel="stylesheet" href="~/css/site.css" />
     </environment>
     <environment exclude="Development">
@@ -17,32 +18,36 @@
     </environment>
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">Warme Bakker</a>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
-                    @*<li class="nav-item"><a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="About">About</a></li>*@
-                    <li class="nav-item"><a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="Index">Products</a></li>
-                    <li class="nav-item"><a class="nav-link text-dark" asp-area="" asp-controller="Customers" asp-action="Index">Customers</a></li>
-                    <li class="nav-item"><a class="nav-link text-dark" asp-area="" asp-controller="Categories" asp-action="Index">Categories</a></li>
-                    <li class="nav-item"><a class="nav-link text-dark" asp-area="" asp-controller="Orders" asp-action="Index">Orders</a></li>
-                @*hierboven index views alle controllers*@
-                </ul>
-            </div>
+
+    <header>
+        <div id="headerlayout">
+            Bakkerij
         </div>
-    </nav>
+        <div id="container">
+            <nav class="navbar navbar navbar-dark bg-dark navbar-expand-md">
+                <button id="nav.btn" class="navbar-toggler" data-toggle="collapse" data-target="#theMenu">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div id="theMenu" class="collapse navbar-collapse ">
+
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="About">About</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+                        @*<li class="nav-item"><a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="About">About</a></li>*@
+                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Products" asp-action="Index">Products</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Customers" asp-action="Index">Customers</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Categories" asp-action="Index">Categories</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Orders" asp-action="Index">Orders</a></li>
+                        @*hierboven index views alle controllers*@
+                    </ul>
+                </div>
+
+
+            </nav>
+        </div>
+    </header>
 
     <partial name="_CookieConsentPartial" />
 
@@ -55,8 +60,8 @@
     </div>
 
     <environment include="Development">
-        <script src="~/lib/jquery/dist/jquery.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/lib/jquery/dist/jquery.js"></script>       
+        <script src="~/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
     </environment>
     <environment exclude="Development">
@@ -76,7 +81,7 @@
     </environment>
 
     @RenderSection("Scripts", required: false)
-    <script src="/node_modules/jquery/dist.jquery.min.js"></script>
-
+   
+   
 </body>
 </html>
