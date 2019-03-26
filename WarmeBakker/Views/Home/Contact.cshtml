@@ -1,17 +1,24 @@
-﻿@{
-    ViewData["Title"] = "Contact";
+﻿@model ContactViewModels
+@{ 
+    ViewBag.Title = "Concact Us";
 }
-<h2>@ViewData["Title"]</h2>
-<h3>@ViewData["Message"]</h3>
 
-<address>
-    Bakkerstraat<br />
-    Ovenweg, Brugge 8000<br />
-    <abbr title="Phone">P:</abbr>
-    telefoonnummer nog in te geven
-</address>
-
-<address>
-    <strong>Support:</strong> <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+<form method="post">
+    <label asp-for="Name">Your Name:</label>
+    <br />
+<input asp-for="Name"/>
+    <br />
+    <label asp-for="Email">E-Mail:</label>
+    <br />
+    <input type="email" asp-for="Email" />
+    <br />
+    <label asp-for="Onderwerp">Onderwerp:</label>
+    <br />
+    <input type="text" asp-for="Onderwerp" />
+    <br />
+    <label asp-for="Message">Bericht: </label>
+    <br />
+    <textarea rows="4" asp-for="Message"></textarea>
+    <br />W
+    <input type="submit" value="Verstuur Bericht" />
+</form>

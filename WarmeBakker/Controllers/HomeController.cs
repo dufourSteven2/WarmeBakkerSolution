@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 using WarmeBakker.Models;
 using Microsoft.EntityFrameworkCore;
 using WarmeBakker.Data;
+using WarmeBakker.ViewModels;
 //using WarmeBakker.Models.ProductViewModels.CategoryGroup;
 //using WarmeBakker.Models.ProductViewModels;
 
@@ -41,11 +42,9 @@ namespace WarmeBakker.Controllers
             return View();
         }
 
-        public IActionResult Contact()
+        public IActionResult Contact(ContactViewModels model)
         {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
+               return View();
         }
 
         public IActionResult Privacy()
