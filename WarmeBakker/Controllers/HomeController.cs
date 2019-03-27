@@ -41,10 +41,26 @@ namespace WarmeBakker.Controllers
 
             return View();
         }
+        [HttpGet("contact")]
+        public IActionResult Contact()
+        {
+            return View();
+        }
 
+        [HttpPost("Contact")]
         public IActionResult Contact(ContactViewModels model)
         {
-               return View();
+            if (ModelState.IsValid)
+            {
+                //stuur email
+                //sla op in database
+
+            }
+            else
+            {
+                //toon de fouten
+            }
+            return View();
         }
 
         public IActionResult Privacy()
