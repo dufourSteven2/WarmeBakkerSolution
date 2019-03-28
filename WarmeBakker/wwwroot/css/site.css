@@ -60,4 +60,18 @@ body {
 
 .main{
     margin: 3px;
+    overflow:auto;
+    padding-bottom: 150px;
+}
+
+.list-group .list-group-flush
+{
+    background-color: #A2A1AB;
+}
+
+.list-group-item {
+    background-color: #A2A1AB;
+}
+.bakcground-colory {
+    background-color: transparent;
 }
