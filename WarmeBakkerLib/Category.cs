@@ -10,6 +10,7 @@ namespace WarmeBakkerLib
 
         public string Name { get; set; }
         public string Description { get; set; }
+        public bool Publication { get; set; }
 
         //Navigation property
         public virtual ICollection<Product> Products { get; set; }

@@ -36,14 +36,14 @@ namespace WarmeBakker.Data
 
             var products = new Product[]
             {
-            new Product{ Name = "Wit" , Price = 2.25m,Description = "Wit brood ongezouten op steengebakken",  CategoryId = 1},
-            new Product{ Name = "Wit" , Price = 2.25m, Description = "Wit brood ongezouten op steengebakken", CategoryId = 2},
-            new Product{ Name = "Wit" , Price = 2.25m,Description = "Wit brood ongezouten op steengebakken", CategoryId = 3},
-            new Product{ Name = "Wit" , Price = 2.25m,Description = "Wit brood ongezouten op steengebakken", CategoryId = 1},
-            new Product{ Name = "Wit" , Price = 2.25m,Description = "Wit brood ongezouten op steengebakken", CategoryId = 2},
-            new Product{ Name = "Wit" , Price = 2.25m,Description = "Wit brood ongezouten op steengebakken", CategoryId = 3},
-            new Product{ Name = "Wit" , Price = 2.25m,Description = "Wit brood ongezouten op steengebakken", CategoryId = 2},
-            new Product{ Name = "Wit" , Price = 2.25m,Description = "Wit brood ongezouten op steengebakken", CategoryId = 1}
+            new Product{ Name = "Wit" , Price = 2.25m,Description = "Wit brood ongezouten op steengebakken",  CategoryId = 1, Highlight=false},
+            new Product{ Name = "Wit" , Price = 2.25m, Description = "Wit brood ongezouten op steengebakken", CategoryId = 2, Highlight=false},
+            new Product{ Name = "Wit" , Price = 2.25m,Description = "Wit brood ongezouten op steengebakken", CategoryId = 3, Highlight=false},
+            new Product{ Name = "Wit" , Price = 2.25m,Description = "Wit brood ongezouten op steengebakken", CategoryId = 1, Highlight=false},
+            new Product{ Name = "Wit" , Price = 2.25m,Description = "Wit brood ongezouten op steengebakken", CategoryId = 2, Highlight=false},
+            new Product{ Name = "Wit" , Price = 2.25m,Description = "Wit brood ongezouten op steengebakken", CategoryId = 3, Highlight=false},
+            new Product{ Name = "Wit" , Price = 2.25m,Description = "Wit brood ongezouten op steengebakken", CategoryId = 2, Highlight=false},
+            new Product{ Name = "Wit" , Price = 2.25m,Description = "Wit brood ongezouten op steengebakken", CategoryId = 1, Highlight=false }
             };
             foreach (Product s in products)
             {
