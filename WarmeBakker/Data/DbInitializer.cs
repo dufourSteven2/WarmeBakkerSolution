@@ -51,8 +51,18 @@ namespace WarmeBakker.Data
             }
             context.SaveChanges();
 
+            var newsMessages = new NewsMessages[]
+            {
+                new NewsMessages{Title = "Nieuwe Site", Message="Welcome op de nieuwe site", publication=true},
+                new NewsMessages{Title = "verlof", Message="verlof van 1 april tot en met 5 april", publication=true},
+                 new NewsMessages{Title = "verlof", Message="verlof van 1 januari tot en met 5 maart", publication=false}
+            };
 
-
+            foreach (NewsMessages n in newsMessages)
+            {
+                context.NewsMessages.Add(n);
+            }
+            context.SaveChanges();
 
             var customers = new Customer[]
             {

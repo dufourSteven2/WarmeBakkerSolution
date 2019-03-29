@@ -4,7 +4,7 @@ using System.Text;
 
 namespace WarmeBakkerLib
 {
-    class NewsMessages
+   public class NewsMessages
     {
 
         public long Id { get; set; }

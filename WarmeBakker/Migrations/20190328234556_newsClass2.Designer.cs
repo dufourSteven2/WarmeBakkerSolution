@@ -2,15 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WarmeBakker.Data;
 
 namespace WarmeBakker.Migrations
 {
     [DbContext(typeof(WarmeBakkerContext))]
-    partial class WarmeBakkerContextModelSnapshot : ModelSnapshot
+    [Migration("20190328234556_newsClass2")]
+    partial class newsClass2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
