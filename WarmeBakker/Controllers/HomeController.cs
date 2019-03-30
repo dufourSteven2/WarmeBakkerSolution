@@ -17,11 +17,18 @@ namespace WarmeBakker.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly WarmeBakkerContext _context;
 
-
-        public IActionResult Index()
+        public HomeController (WarmeBakkerContext context)
         {
-            return View();
+            _context = context;
+        }
+
+
+        public async Task <IActionResult> Index()
+        {
+            var newsmessages = await _context.NewsMessages.Where(nm => nm.publication == true).ToListAsync();
+            return View(newsmessages);
         }
 
         public IActionResult About()

@@ -93,19 +93,24 @@
         </div>
     </div>*@
 
+@model IEnumerable<WarmeBakkerLib.NewsMessages>
+
 @{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="jumbotron">
-    <h1>Warme Bakker</h1>
-</div>
 <div class="row">
-    <div class="col-md-4">
-        <h2>Welcome bij de warme bakker</h2>
-        <p>
-            Dit is een voorlopige demo voor een webshop.
-        </p>
+
+
+    <div>
+        <h3>Nieuws berichten:</h3>
+        @foreach (var m in Model)
+        {
+            <div>
+                <h5>@m.Title</h5>
+                <p>@m.Message </p>
+            </div>
+        }
     </div>
-    
+
 </div>
