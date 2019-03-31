@@ -27,7 +27,8 @@ namespace WarmeBakker.Controllers
 
         public async Task <IActionResult> Index()
         {
-            var newsmessages = await _context.NewsMessages.Where(nm => nm.publication == true).ToListAsync();
+            DateTime Today = DateTime.Today;
+                var newsmessages = await _context.NewsMessages.Where(nm => nm.StartDate >= Today && Today <= nm.EndDate ).ToListAsync();
             return View(newsmessages);
         }
 

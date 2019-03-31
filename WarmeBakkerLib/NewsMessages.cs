@@ -11,5 +11,7 @@ namespace WarmeBakkerLib
         public string Title { get; set; }
         public string Message { get; set;}
         public bool publication { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
     }
 }
