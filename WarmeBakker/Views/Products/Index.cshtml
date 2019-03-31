@@ -24,7 +24,7 @@
     <thead>
         <tr>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Category</a>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">SubCategory</a>
                 @*<a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]">@Html.DisplayNameFor(model => model.Category)</a>*@
             </th>
             <th>
@@ -64,7 +64,7 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Category.Name)
+                    @Html.DisplayFor(modelItem => item.SubCategory.Name)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Price)

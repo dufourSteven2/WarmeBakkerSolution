@@ -22,6 +22,12 @@ namespace WarmeBakker.Models
         public string CategoryName { get; set; }
     }
 
+    public class SubCategoryDTO
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+    }
+
     public class CategoryDTO
     {
         public int Id { get; set; }

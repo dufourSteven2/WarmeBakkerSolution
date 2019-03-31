@@ -14,17 +14,20 @@ namespace WarmeBakker.Data
         }
 
         public DbSet<Category> Categories { get; set; }
+        public DbSet<SubCategory> SubCategories { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderLine> OrderLines { get; set; }
         public DbSet<NewsMessages> NewsMessages { get; set; }
+        
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             
             modelBuilder.Entity<Product>().ToTable("Product");
-            modelBuilder.Entity<Category>().ToTable("Category");
+            modelBuilder.Entity<SubCategory>().ToTable("SubCategory");
+            modelBuilder.Entity<Category>().ToTable("Category");           
             modelBuilder.Entity<Category>().HasIndex(p => p.Name); /////////////////bijgevoegde lijn voor test
             modelBuilder.Entity<Customer>().ToTable("Customer");
             modelBuilder.Entity<Order>().ToTable("Order");

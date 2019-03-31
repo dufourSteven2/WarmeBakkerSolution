@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WarmeBakker.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,7 +15,8 @@ namespace WarmeBakker.Migrations
                     Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true)
+                    Description = table.Column<string>(nullable: true),
+                    Publication = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -41,6 +43,23 @@ namespace WarmeBakker.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "NewsMessages",
+                columns: table => new
+                {
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Title = table.Column<string>(nullable: true),
+                    Message = table.Column<string>(nullable: true),
+                    publication = table.Column<bool>(nullable: false),
+                    StartDate = table.Column<DateTime>(nullable: false),
+                    EndDate = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_NewsMessages", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Order",
                 columns: table => new
                 {
@@ -54,6 +73,28 @@ namespace WarmeBakker.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "SubCategory",
+                columns: table => new
+                {
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    Publication = table.Column<bool>(nullable: false),
+                    CategoryId = table.Column<long>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SubCategory", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_SubCategory_Category_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Category",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Product",
                 columns: table => new
                 {
@@ -62,15 +103,16 @@ namespace WarmeBakker.Migrations
                     Name = table.Column<string>(nullable: true),
                     Price = table.Column<decimal>(type: "decimal(5, 2)", nullable: false),
                     Description = table.Column<string>(nullable: true),
-                    CategoryId = table.Column<long>(nullable: false)
+                    Highlight = table.Column<bool>(nullable: false),
+                    SubCategoryId = table.Column<long>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Product", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Product_Category_CategoryId",
-                        column: x => x.CategoryId,
-                        principalTable: "Category",
+                        name: "FK_Product_SubCategory_SubCategoryId",
+                        column: x => x.SubCategoryId,
+                        principalTable: "SubCategory",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -118,8 +160,13 @@ namespace WarmeBakker.Migrations
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Product_CategoryId",
+                name: "IX_Product_SubCategoryId",
                 table: "Product",
+                column: "SubCategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SubCategory_CategoryId",
+                table: "SubCategory",
                 column: "CategoryId");
         }
 
@@ -129,6 +176,9 @@ namespace WarmeBakker.Migrations
                 name: "Customer");
 
             migrationBuilder.DropTable(
+                name: "NewsMessages");
+
+            migrationBuilder.DropTable(
                 name: "OrderLine");
 
             migrationBuilder.DropTable(
@@ -136,6 +186,9 @@ namespace WarmeBakker.Migrations
 
             migrationBuilder.DropTable(
                 name: "Product");
+
+            migrationBuilder.DropTable(
+                name: "SubCategory");
 
             migrationBuilder.DropTable(
                 name: "Category");

@@ -124,8 +124,6 @@ namespace WarmeBakker.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<long>("CategoryId");
-
                     b.Property<string>("Description");
 
                     b.Property<bool>("Highlight");
@@ -135,11 +133,34 @@ namespace WarmeBakker.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(5, 2)");
 
+                    b.Property<long>("SubCategoryId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SubCategoryId");
+
+                    b.ToTable("Product");
+                });
+
+            modelBuilder.Entity("WarmeBakkerLib.SubCategory", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<long>("CategoryId");
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("Name");
+
+                    b.Property<bool>("Publication");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Product");
+                    b.ToTable("SubCategory");
                 });
 
             modelBuilder.Entity("WarmeBakkerLib.OrderLine", b =>
@@ -157,8 +178,16 @@ namespace WarmeBakker.Migrations
 
             modelBuilder.Entity("WarmeBakkerLib.Product", b =>
                 {
-                    b.HasOne("WarmeBakkerLib.Category", "Category")
+                    b.HasOne("WarmeBakkerLib.SubCategory", "SubCategory")
                         .WithMany("Products")
+                        .HasForeignKey("SubCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("WarmeBakkerLib.SubCategory", b =>
+                {
+                    b.HasOne("WarmeBakkerLib.Category", "Category")
+                        .WithMany("SubCategories")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

@@ -14,7 +14,7 @@ namespace WarmeBakker.Data
         {
             context.Database.EnsureCreated();
 
-            // Look for any students.
+            // Look for any products.
             if (context.Products.Any())
             {
                 return;   // DB has been seeded
@@ -22,9 +22,9 @@ namespace WarmeBakker.Data
 
             var categories = new Category[]
             {
-            new Category{ Name="Brood", Description = "Alle brood word op steen gebakken"},
-            new Category{ Name="Taarten", Description = "Alle brood word op steen gebakken"},
-            new Category{ Name="Boterkoeken", Description = "Alle brood word op steen gebakken"}
+            new Category{ Name="Brood", Description = "Alle brood word op steen gebakken", Publication=true},
+            new Category{ Name="Taarten", Description = "Alle brood word op steen gebakken", Publication=true},
+            new Category{ Name="Boterkoeken", Description = "Alle brood word op steen gebakken", Publication=true}
             };
             foreach (Category c in categories)
             {
@@ -33,17 +33,30 @@ namespace WarmeBakker.Data
             context.SaveChanges();
 
 
+            var subcategories = new SubCategory[]
+            {
+            new SubCategory{ Name="Wit", Description = "Witte broden", Publication=true, CategoryId = 1},
+            new SubCategory{ Name="Fruit", Description = "Fruittaarten", Publication=true, CategoryId = 2},
+            new SubCategory{ Name="Pudding", Description = "Boterkoeken met pudding", Publication=true, CategoryId = 3}
+            };
+            foreach (SubCategory c in subcategories)
+            {
+                context.SubCategories.Add(c);
+            }
+            context.SaveChanges();
+
+
 
             var products = new Product[]
             {
-            new Product{ Name = "Wit" , Price = 2.25m,Description = "Wit brood ongezouten op steengebakken",  CategoryId = 1, Highlight=false},
-            new Product{ Name = "Wit" , Price = 2.25m, Description = "Wit brood ongezouten op steengebakken", CategoryId = 2, Highlight=false},
-            new Product{ Name = "Wit" , Price = 2.25m,Description = "Wit brood ongezouten op steengebakken", CategoryId = 3, Highlight=false},
-            new Product{ Name = "Wit" , Price = 2.25m,Description = "Wit brood ongezouten op steengebakken", CategoryId = 1, Highlight=false},
-            new Product{ Name = "Wit" , Price = 2.25m,Description = "Wit brood ongezouten op steengebakken", CategoryId = 2, Highlight=false},
-            new Product{ Name = "Wit" , Price = 2.25m,Description = "Wit brood ongezouten op steengebakken", CategoryId = 3, Highlight=false},
-            new Product{ Name = "Wit" , Price = 2.25m,Description = "Wit brood ongezouten op steengebakken", CategoryId = 2, Highlight=false},
-            new Product{ Name = "Wit" , Price = 2.25m,Description = "Wit brood ongezouten op steengebakken", CategoryId = 1, Highlight=false }
+            new Product{ Name = "Vierkant" , Price = 2.25m,Description = "Wit brood ongezouten op steengebakken", Highlight=false, SubCategoryId = 1,},
+            new Product{ Name = "Rond" , Price = 2.25m, Description = "Wit brood ongezouten op steengebakken", Highlight=false, SubCategoryId = 1},
+            new Product{ Name = "Lang" , Price = 2.25m,Description = "Wit brood ongezouten op steengebakken", Highlight=false, SubCategoryId = 1},
+            new Product{ Name = "Aardbei" , Price = 2.25m,Description = "Wit brood ongezouten op steengebakken", Highlight=false, SubCategoryId = 2},
+            new Product{ Name = "Pruimen" , Price = 2.25m,Description = "Wit brood ongezouten op steengebakken", Highlight=false, SubCategoryId = 2},
+            new Product{ Name = "Acht" , Price = 2.25m,Description = "Wit brood ongezouten op steengebakken", Highlight=false, SubCategoryId = 3},
+            new Product{ Name = "Hoorntje" , Price = 2.25m,Description = "Wit brood ongezouten op steengebakken", Highlight=false, SubCategoryId = 3},
+            new Product{ Name = "Suisse" , Price = 2.25m,Description = "Wit brood ongezouten op steengebakken", Highlight=false, SubCategoryId = 3 }
             };
             foreach (Product s in products)
             {

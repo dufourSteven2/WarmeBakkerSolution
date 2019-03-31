@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace WarmeBakkerLib
 {
@@ -16,9 +19,11 @@ namespace WarmeBakkerLib
         public bool Highlight { get; set; }
 
         //Foreign Key
-        public long CategoryId { get; set; }
+        public long SubCategoryId { get; set; }
+        //public long CategoryId { get; set; }
 
         //Navigation Property
-        public virtual Category Category { get; set; }
+        public virtual SubCategory SubCategory { get; set; }
+        //public virtual Category Category { get; set; }
     }
 }

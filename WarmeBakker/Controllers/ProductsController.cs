@@ -37,18 +37,18 @@ namespace WarmeBakker.Controllers
 
             ViewData["CurrentFilter"] = searchString;
 
-            var products = from s in _context.Products.Include(p => p.Category)
+            var products = from s in _context.Products.Include(p => p.SubCategory)
                            select s;
             if (!String.IsNullOrEmpty(searchString))
             {
-                products = products.Where(s => s.Category.Name.Contains(searchString));
+                products = products.Where(s => s.SubCategory.Name.Contains(searchString));
                 //(s => s.Category.Name.Contains(searchString) ||s =>s.Price.Contains(searchstring)) kan ook is dan extra filter
             }
 
             switch (sortOrder)
             {
                 case "name_desc":
-                    products = products.OrderByDescending(p => p.Category.Name);
+                    products = products.OrderByDescending(p => p.SubCategory.Name);
                     break;
                 case "Price":
                     products = products.OrderBy(s => s.Price);
@@ -78,7 +78,7 @@ namespace WarmeBakker.Controllers
             }
 
             var product = await _context.Products
-                .Include(p => p.Category)
+                .Include(p => p.SubCategory)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (product == null)
             {
@@ -91,7 +91,7 @@ namespace WarmeBakker.Controllers
         // GET: Products/Create
         public IActionResult Create()
         {
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id");
+            ViewData["SubCategoryId"] = new SelectList(_context.SubCategories, "Id", "Id");
             return View();
         }
 
@@ -100,7 +100,7 @@ namespace WarmeBakker.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Price,Description,CategoryId")] Product product)
+        public async Task<IActionResult> Create([Bind("Id,Name,Price,Description,SubCategoryId")] Product product)
         {
             try
             {
@@ -135,7 +135,7 @@ namespace WarmeBakker.Controllers
             {
                 return NotFound();
             }
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id", product.CategoryId);
+            ViewData["SubCategoryId"] = new SelectList(_context.SubCategories, "Id", "Id", product.SubCategoryId);
             return View(product);
         }
 
@@ -210,7 +210,7 @@ namespace WarmeBakker.Controllers
             }
 
             var product = await _context.Products
-                .Include(p => p.Category)
+                .Include(p => p.SubCategory)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (product == null)
             {
