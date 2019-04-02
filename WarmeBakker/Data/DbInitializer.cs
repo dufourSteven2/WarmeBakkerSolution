@@ -67,7 +67,7 @@ namespace WarmeBakker.Data
             var newsMessages = new NewsMessages[]
             {
                 new NewsMessages{Title = "Nieuwe Site", Message="Welcome op de nieuwe site", publication=true, StartDate= DateTime.Parse("30-10-2019"), EndDate= DateTime.Parse("01-07-2019")},
-                new NewsMessages{Title = "verlof", Message="verlof van 1 april tot en met 5 april", publication=true,  StartDate= DateTime.Parse("30-10-2019"), EndDate= DateTime.Parse("01-07-2019")},
+                new NewsMessages{Title = "verlof", Message="verlof van 1 april tot en met 5 april", publication=false,  StartDate= DateTime.Parse("30-10-2019"), EndDate= DateTime.Parse("01-07-2019")},
                  new NewsMessages{Title = "verlof", Message="verlof van 1 januari tot en met 5 maart", publication=false}
             };
 
