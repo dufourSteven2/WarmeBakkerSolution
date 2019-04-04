@@ -10,8 +10,8 @@ using WarmeBakker.Data;
 namespace WarmeBakker.Migrations
 {
     [DbContext(typeof(WarmeBakkerContext))]
-    [Migration("20190404170205_initial")]
-    partial class initial
+    [Migration("20190404172712_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,11 +23,13 @@ namespace WarmeBakker.Migrations
 
             modelBuilder.Entity("WarmeBakkerLib.Category", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Description");
+
+                    b.Property<int?>("HeadCategoryId");
 
                     b.Property<string>("Name");
 
@@ -35,9 +37,9 @@ namespace WarmeBakker.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Name");
+                    b.HasIndex("HeadCategoryId");
 
-                    b.ToTable("Category");
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("WarmeBakkerLib.Customer", b =>
@@ -128,6 +130,8 @@ namespace WarmeBakker.Migrations
 
                     b.Property<long>("CategoryId");
 
+                    b.Property<int?>("CategoryId1");
+
                     b.Property<string>("Description");
 
                     b.Property<bool>("Highlight");
@@ -139,7 +143,7 @@ namespace WarmeBakker.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CategoryId");
+                    b.HasIndex("CategoryId1");
 
                     b.ToTable("Product");
                 });
@@ -155,6 +159,13 @@ namespace WarmeBakker.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("topicsContactforms");
+                });
+
+            modelBuilder.Entity("WarmeBakkerLib.Category", b =>
+                {
+                    b.HasOne("WarmeBakkerLib.Category", "HeadCategory")
+                        .WithMany()
+                        .HasForeignKey("HeadCategoryId");
                 });
 
             modelBuilder.Entity("WarmeBakkerLib.OrderLine", b =>
@@ -174,8 +185,7 @@ namespace WarmeBakker.Migrations
                 {
                     b.HasOne("WarmeBakkerLib.Category", "Category")
                         .WithMany("Products")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("CategoryId1");
                 });
 #pragma warning restore 612, 618
         }

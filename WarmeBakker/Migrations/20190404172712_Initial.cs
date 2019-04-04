@@ -4,23 +4,30 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WarmeBakker.Migrations
 {
-    public partial class initial : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Category",
+                name: "Categories",
                 columns: table => new
                 {
-                    Id = table.Column<long>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
-                    Publication = table.Column<bool>(nullable: false)
+                    Publication = table.Column<bool>(nullable: false),
+                    HeadCategoryId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Category", x => x.Id);
+                    table.PrimaryKey("PK_Categories", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Categories_Categories_HeadCategoryId",
+                        column: x => x.HeadCategoryId,
+                        principalTable: "Categories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -95,17 +102,18 @@ namespace WarmeBakker.Migrations
                     Price = table.Column<decimal>(type: "decimal(5, 2)", nullable: false),
                     Description = table.Column<string>(nullable: true),
                     Highlight = table.Column<bool>(nullable: false),
-                    CategoryId = table.Column<long>(nullable: false)
+                    CategoryId = table.Column<long>(nullable: false),
+                    CategoryId1 = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Product", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Product_Category_CategoryId",
-                        column: x => x.CategoryId,
-                        principalTable: "Category",
+                        name: "FK_Product_Categories_CategoryId1",
+                        column: x => x.CategoryId1,
+                        principalTable: "Categories",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -136,9 +144,9 @@ namespace WarmeBakker.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Category_Name",
-                table: "Category",
-                column: "Name");
+                name: "IX_Categories_HeadCategoryId",
+                table: "Categories",
+                column: "HeadCategoryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_OrderLine_OrderId",
@@ -151,9 +159,9 @@ namespace WarmeBakker.Migrations
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Product_CategoryId",
+                name: "IX_Product_CategoryId1",
                 table: "Product",
-                column: "CategoryId");
+                column: "CategoryId1");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -177,7 +185,7 @@ namespace WarmeBakker.Migrations
                 name: "Product");
 
             migrationBuilder.DropTable(
-                name: "Category");
+                name: "Categories");
         }
     }
 }

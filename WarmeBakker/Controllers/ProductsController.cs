@@ -42,7 +42,7 @@ namespace WarmeBakker.Controllers
             if (!String.IsNullOrEmpty(searchString))
             {
                 products = products.Where(s => s.Category.Name.Contains(searchString));
-                //(s => s.Category.Name.Contains(searchString) ||s =>s.Price.Contains(searchstring)) kan ook is dan extra filter
+                //(s => s.Category.Name.Contains(searchString) ||s =>s.Price.Contains(searchstring)) //kan ook is dan extra filter
             }
 
             switch (sortOrder)

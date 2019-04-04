@@ -49,14 +49,14 @@ namespace WarmeBakker.Data
 
             var products = new Product[]
             {
-            new Product{ Name = "Wit" , Price = 2.25m,Description = "Wit brood ongezouten op steengebakken",  CategoryId = 1, Highlight=false},
-            new Product{ Name = "Wit" , Price = 2.25m, Description = "Wit brood ongezouten op steengebakken", CategoryId = 2, Highlight=false},
-            new Product{ Name = "Wit" , Price = 2.25m,Description = "Wit brood ongezouten op steengebakken", CategoryId = 3, Highlight=false},
-            new Product{ Name = "Wit" , Price = 2.25m,Description = "Wit brood ongezouten op steengebakken", CategoryId = 1, Highlight=false},
-            new Product{ Name = "Wit" , Price = 2.25m,Description = "Wit brood ongezouten op steengebakken", CategoryId = 2, Highlight=false},
-            new Product{ Name = "Wit" , Price = 2.25m,Description = "Wit brood ongezouten op steengebakken", CategoryId = 3, Highlight=false},
-            new Product{ Name = "Wit" , Price = 2.25m,Description = "Wit brood ongezouten op steengebakken", CategoryId = 2, Highlight=false},
-            new Product{ Name = "Wit" , Price = 2.25m,Description = "Wit brood ongezouten op steengebakken", CategoryId = 1, Highlight=false }
+            new Product{ Name = "klein wit" , Price = 2.25m,Description = "Wit brood ongezouten op steengebakken",  CategoryId = 1, Highlight=false},
+            new Product{ Name = "Met slagroom" , Price = 2.25m, Description = "Een caloriebom", CategoryId = 2, Highlight=false},
+            new Product{ Name = "Hoorntje" , Price = 2.25m,Description = "Wit brood ongezouten op steengebakken", CategoryId = 3, Highlight=false},
+            new Product{ Name = "Bruin" , Price = 2.25m,Description = "Wit brood ongezouten op steengebakken", CategoryId = 1, Highlight=false},
+            new Product{ Name = "Groot wit" , Price = 2.25m,Description = "Voor de grote honger een ongezouten op steengebakken", CategoryId = 1, Highlight=false},
+            new Product{ Name = "Vierkant wit" , Price = 2.25m,Description = "Wit brood ongezouten op steengebakken", CategoryId = 1, Highlight=false},
+            new Product{ Name = "Acht" , Price = 2.25m,Description = "Wit brood ongezouten op steengebakken", CategoryId = 3, Highlight=false},
+            new Product{ Name = "Suisse" , Price = 2.25m,Description = "Wit brood ongezouten op steengebakken", CategoryId = 3, Highlight=false }
             };
             foreach (Product s in products)
             {
