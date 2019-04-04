@@ -100,7 +100,22 @@ namespace WarmeBakker.Data
                 context.OrderLines.Add(e);
             }
             context.SaveChanges();
+
+            var contactTopic = new topicsContactForm[]
+            {
+                new topicsContactForm{ Title ="Info over bestellingen, afhalingen."},
+                new topicsContactForm{Title = "info over een product die niet in de lijst staat."},
+                new topicsContactForm{Title = "Tehcnische probleem met de site of suggesties."}
+            };
+
+            foreach (topicsContactForm ct in contactTopic)
+            {
+                context.topicsContactforms.Add(ct);
+            }
+            context.SaveChanges();
+
         }
 
+       
     }
 }

@@ -10,6 +10,8 @@ using WarmeBakker.Models;
 using Microsoft.EntityFrameworkCore;
 using WarmeBakker.Data;
 using WarmeBakker.ViewModels;
+using WarmeBakker.Services;
+
 //using WarmeBakker.Models.ProductViewModels.CategoryGroup;
 //using WarmeBakker.Models.ProductViewModels;
 
@@ -17,10 +19,14 @@ namespace WarmeBakker.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IMailService _mailService;
         private readonly WarmeBakkerContext _context;
 
-        public HomeController (WarmeBakkerContext context)
+
+
+        public HomeController (WarmeBakkerContext context, IMailService mailService)
         {
+            _mailService = mailService;
             _context = context;
         }
 
@@ -60,12 +66,15 @@ namespace WarmeBakker.Controllers
         {
             if (ModelState.IsValid)
             {
-                //stuur email
-                //sla op in database
+                //send email
+                _mailService.SendMessage("benny.vanderschaeghe@proximus.be", model.Onderwerp, $"from: {model.Name} - {model.Email} - Message: {model.Message}" );
+                ViewBag.UserMessage = "Bericht verstuurd.";
+                ModelState.Clear();
 
             }
             else
             {
+
                 //toon de fouten
             }
             return View();

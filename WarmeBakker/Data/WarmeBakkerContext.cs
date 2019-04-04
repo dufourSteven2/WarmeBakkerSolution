@@ -19,6 +19,7 @@ namespace WarmeBakker.Data
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderLine> OrderLines { get; set; }
         public DbSet<NewsMessages> NewsMessages { get; set; }
+        public DbSet<topicsContactForm> topicsContactforms { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -30,6 +31,7 @@ namespace WarmeBakker.Data
             modelBuilder.Entity<Order>().ToTable("Order");
             modelBuilder.Entity<OrderLine>().ToTable("OrderLine");
             modelBuilder.Entity<NewsMessages>().ToTable("NewsMessages");
+            modelBuilder.Entity<topicsContactForm>().ToTable("topicsContactforms");
         }
     }
 }

@@ -13,6 +13,7 @@ using WarmeBakker.Data;
 using Microsoft.EntityFrameworkCore;
 using AutoMapper;
 using WarmeBakker.Automapper;
+using WarmeBakker.Services;
 
 namespace WarmeBakker
 {
@@ -44,7 +45,8 @@ namespace WarmeBakker
             var mapper = config.CreateMapper();
             services.AddSingleton(mapper);
 
-
+            services.AddTransient<IMailService, NullMailService>();
+            //support for real mail service
             services.AddDbContext<WarmeBakkerContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }

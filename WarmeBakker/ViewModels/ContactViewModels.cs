@@ -3,11 +3,19 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using WarmeBakker.Models;
+using WarmeBakker.Data;
+using WarmeBakkerLib;
+using System.Collections.ObjectModel;
 
 namespace WarmeBakker.ViewModels
 {
     public class ContactViewModels
+
+
     {
+   
+    
         [Required]
         [MinLength(5)]
         public string Name { get; set; }
@@ -20,4 +28,6 @@ namespace WarmeBakker.ViewModels
         [MaxLength(250, ErrorMessage ="Te groot bericht.")]
         public string Message { get; set; }
     }
+
+    
 }
