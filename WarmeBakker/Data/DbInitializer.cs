@@ -23,7 +23,8 @@ namespace WarmeBakker.Data
             var headCategories = new Category[]
             {
                 new Category{Name="Brood", Description="alle soorten brood"},
-                new Category{Name="Taarten", Description="alle soorten brood"}
+                new Category{Name="Taarten", Description="alle soorten taarten"},
+                 new Category{Name="Boterkoeken", Description="alle soorten boterkoeken"}
             };
             foreach (Category c in headCategories)
             {
@@ -34,8 +35,8 @@ namespace WarmeBakker.Data
             var categories = new Category[]
             {
             new Category{ Name="Wit Brood", Description = "Alle Wit brood word op steen gebakken", HeadCategoryId = 1},
-            new Category{ Name="Taarten", Description = "Alle brood word op steen gebakken"},
-            new Category{ Name="Boterkoeken", Description = "Alle brood word op steen gebakken"}
+            new Category{ Name="Chocolade taart", Description = "Alle taarten met chocolade", HeadCategoryId = 2},
+            new Category{ Name="Boterkoeken", Description = "Alle brood word op steen gebakken", HeadCategoryId = 3}
         
             };
             foreach (Category c in categories)
