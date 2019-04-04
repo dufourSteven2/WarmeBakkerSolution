@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WarmeBakker.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,7 +15,8 @@ namespace WarmeBakker.Migrations
                     Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true)
+                    Description = table.Column<string>(nullable: true),
+                    Publication = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -41,6 +43,23 @@ namespace WarmeBakker.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "NewsMessages",
+                columns: table => new
+                {
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Title = table.Column<string>(nullable: true),
+                    Message = table.Column<string>(nullable: true),
+                    publication = table.Column<bool>(nullable: false),
+                    StartDate = table.Column<DateTime>(nullable: false),
+                    EndDate = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_NewsMessages", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Order",
                 columns: table => new
                 {
@@ -54,6 +73,19 @@ namespace WarmeBakker.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "topicsContactforms",
+                columns: table => new
+                {
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Title = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_topicsContactforms", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Product",
                 columns: table => new
                 {
@@ -62,6 +94,7 @@ namespace WarmeBakker.Migrations
                     Name = table.Column<string>(nullable: true),
                     Price = table.Column<decimal>(type: "decimal(5, 2)", nullable: false),
                     Description = table.Column<string>(nullable: true),
+                    Highlight = table.Column<bool>(nullable: false),
                     CategoryId = table.Column<long>(nullable: false)
                 },
                 constraints: table =>
@@ -129,7 +162,13 @@ namespace WarmeBakker.Migrations
                 name: "Customer");
 
             migrationBuilder.DropTable(
+                name: "NewsMessages");
+
+            migrationBuilder.DropTable(
                 name: "OrderLine");
+
+            migrationBuilder.DropTable(
+                name: "topicsContactforms");
 
             migrationBuilder.DropTable(
                 name: "Order");

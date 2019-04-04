@@ -52,4 +52,8 @@
     <ProjectReference Include="..\WarmeBakkerLib\WarmeBakkerLib.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>

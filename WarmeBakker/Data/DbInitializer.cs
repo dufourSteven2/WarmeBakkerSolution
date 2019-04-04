@@ -20,11 +20,23 @@ namespace WarmeBakker.Data
                 return;   // DB has been seeded
             }
 
+            var headCategories = new Category[]
+            {
+                new Category{Name="Brood", Description="alle soorten brood"},
+                new Category{Name="Taarten", Description="alle soorten brood"}
+            };
+            foreach (Category c in headCategories)
+            {
+                context.Categories.Add(c);
+            }
+            context.SaveChanges();
+
             var categories = new Category[]
             {
-            new Category{ Name="Brood", Description = "Alle brood word op steen gebakken"},
+            new Category{ Name="Wit Brood", Description = "Alle Wit brood word op steen gebakken", HeadCategoryId = 1},
             new Category{ Name="Taarten", Description = "Alle brood word op steen gebakken"},
             new Category{ Name="Boterkoeken", Description = "Alle brood word op steen gebakken"}
+        
             };
             foreach (Category c in categories)
             {

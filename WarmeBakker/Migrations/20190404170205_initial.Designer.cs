@@ -10,8 +10,8 @@ using WarmeBakker.Data;
 namespace WarmeBakker.Migrations
 {
     [DbContext(typeof(WarmeBakkerContext))]
-    [Migration("20190331005239_NewsClass3")]
-    partial class NewsClass3
+    [Migration("20190404170205_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -142,6 +142,19 @@ namespace WarmeBakker.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Product");
+                });
+
+            modelBuilder.Entity("WarmeBakkerLib.topicsContactForm", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Title");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("topicsContactforms");
                 });
 
             modelBuilder.Entity("WarmeBakkerLib.OrderLine", b =>
