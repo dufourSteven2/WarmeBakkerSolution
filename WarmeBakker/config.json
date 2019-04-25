@@ -1,6 +1,13 @@
 {
   "ConnectionStrings": {
     "DefaultConnection": "Server=(localdb)\\mssqllocaldb;Database=WarmeBakkerDb;Trusted_Connection=True;MultipleActiveResultSets=true"
+  },
+  //loging information database errors
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft":  "Warning"
+    }
   }
 
 

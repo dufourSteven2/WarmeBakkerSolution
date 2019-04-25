@@ -20,27 +20,27 @@ namespace WarmeBakker.Controllers
     public class HomeController : Controller
     {
         private readonly IMailService _mailService;
-        private readonly WarmeBakkerContext _context;
+        private readonly IBakkerRepository _repository;
 
 
 
-        public HomeController (WarmeBakkerContext context, IMailService mailService)
+        public HomeController (IBakkerRepository repository, IMailService mailService)
         {
             _mailService = mailService;
-            _context = context;
+            _repository = repository;
         }
 
 
-        public async Task <IActionResult> Index()
+        public  IActionResult Index()
         {
-            DateTime Today = DateTime.Today;
-                var newsmessages = await _context.NewsMessages.Where(nm => nm.StartDate >= Today && Today <= nm.EndDate ).ToListAsync();
+
+            var newsmessages = _repository.GetNewsMessages();
             return View(newsmessages);
         }
 
         public IActionResult Shop()
         {
-            var result = _context.Products.OrderBy(p => p.Category);
+            var result = _repository.GetAllProducts();
             return View(result.ToList());
         }
 

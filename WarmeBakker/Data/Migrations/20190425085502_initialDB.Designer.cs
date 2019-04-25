@@ -9,7 +9,7 @@ using WarmeBakker.Data;
 
 namespace WarmeBakker.Migrations
 {
-    [DbContext(typeof(WarmeBakkerContext))]
+    [DbContext(typeof(IBakkerRepository))]
     [Migration("20190425085502_initialDB")]
     partial class initialDB
     {

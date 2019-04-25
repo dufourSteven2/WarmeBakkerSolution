@@ -8,7 +8,7 @@ using WarmeBakker.Data;
 
 namespace WarmeBakker.Migrations
 {
-    [DbContext(typeof(WarmeBakkerContext))]
+    [DbContext(typeof(IBakkerRepository))]
     partial class WarmeBakkerContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
