@@ -33,7 +33,7 @@ namespace WarmeBakker.Data
             modelBuilder.Entity<NewsMessages>().ToTable("NewsMessages");
             modelBuilder.Entity<topicsContactForm>().ToTable("topicsContactforms");
 
-            modelBuilder.Entity<Category>().HasOne(c =>  c.HeadCategory).WithMany().HasForeignKey(m => m.HeadCategoryId);
+            modelBuilder.Entity<Category>().HasOne(c =>  c.HeadCategory).WithMany().HasForeignKey(m => m.HeadCategoryId).OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

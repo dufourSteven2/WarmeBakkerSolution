@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WarmeBakker.Migrations
 {
-    public partial class Initial : Migration
+    public partial class initialDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -72,6 +72,8 @@ namespace WarmeBakker.Migrations
                 {
                     Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    OrderDate = table.Column<DateTime>(nullable: false),
+                    DelieveryDate = table.Column<DateTime>(nullable: false),
                     CustomerId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -123,6 +125,7 @@ namespace WarmeBakker.Migrations
                     Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Quantity = table.Column<int>(nullable: false),
+                    UnitPrice = table.Column<decimal>(nullable: false),
                     ProductId = table.Column<long>(nullable: false),
                     OrderId = table.Column<long>(nullable: false)
                 },

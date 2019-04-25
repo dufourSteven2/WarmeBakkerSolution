@@ -1,0 +1,7 @@
+{
+  "ConnectionStrings": {
+    "DefaultConnection": "Server=(localdb)\\mssqllocaldb;Database=WarmeBakkerDb;Trusted_Connection=True;MultipleActiveResultSets=true"
+  }
+
+
+}

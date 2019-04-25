@@ -13,8 +13,8 @@ namespace WarmeBakkerLib
         public bool Publication { get; set; }
 
         public int? HeadCategoryId { get; set;  }
-        public  Category HeadCategory { get; set; }
-        //public virtual ICollection<Category> SubCategories { get; set; }
+        public virtual  Category HeadCategory { get; set; }
+       
 
         //Navigation property
         public virtual ICollection<Product> Products { get; set; }

@@ -3,17 +3,15 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WarmeBakker.Data;
 
 namespace WarmeBakker.Migrations
 {
     [DbContext(typeof(WarmeBakkerContext))]
-    [Migration("20190404172712_Initial")]
-    partial class Initial
+    partial class WarmeBakkerContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -96,6 +94,10 @@ namespace WarmeBakker.Migrations
 
                     b.Property<int>("CustomerId");
 
+                    b.Property<DateTime>("DelieveryDate");
+
+                    b.Property<DateTime>("OrderDate");
+
                     b.HasKey("Id");
 
                     b.ToTable("Order");
@@ -112,6 +114,8 @@ namespace WarmeBakker.Migrations
                     b.Property<long>("ProductId");
 
                     b.Property<int>("Quantity");
+
+                    b.Property<decimal>("UnitPrice");
 
                     b.HasKey("Id");
 
@@ -165,7 +169,8 @@ namespace WarmeBakker.Migrations
                 {
                     b.HasOne("WarmeBakkerLib.Category", "HeadCategory")
                         .WithMany()
-                        .HasForeignKey("HeadCategoryId");
+                        .HasForeignKey("HeadCategoryId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("WarmeBakkerLib.OrderLine", b =>

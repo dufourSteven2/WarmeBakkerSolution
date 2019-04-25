@@ -38,6 +38,12 @@ namespace WarmeBakker.Controllers
             return View(newsmessages);
         }
 
+        public IActionResult Shop()
+        {
+            var result = _context.Products.OrderBy(p => p.Category);
+            return View(result.ToList());
+        }
+
         public IActionResult About()
         {
 

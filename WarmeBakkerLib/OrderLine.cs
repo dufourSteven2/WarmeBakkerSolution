@@ -8,8 +8,9 @@ namespace WarmeBakkerLib
     {
         public long Id { get; set; }
         public int Quantity { get; set; }
+        public decimal UnitPrice { get; set; }
 
-        //Foreign Key
+        ////Foreign Key
         public long ProductId { get; set; }
         public long OrderId { get; set; }
 

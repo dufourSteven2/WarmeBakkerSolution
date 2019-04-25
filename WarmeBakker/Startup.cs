@@ -19,9 +19,11 @@ namespace WarmeBakker
 {
     public class Startup
     {
+        private readonly IConfiguration _Configuration;
+
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            _Configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }
@@ -47,7 +49,12 @@ namespace WarmeBakker
 
             services.AddTransient<IMailService, NullMailService>();
             //support for real mail service
-            services.AddDbContext<WarmeBakkerContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<WarmeBakkerContext>(options =>
+            {
+                options.UseSqlServer(_Configuration.GetConnectionString("DefaultConnection"));
+                
+                });
+            services.AddTransient<BakkerijSeeding>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
