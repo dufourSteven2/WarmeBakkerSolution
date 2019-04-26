@@ -18,5 +18,6 @@ namespace WarmeBakkerLib
 
         //Navigation property
         public virtual ICollection<Product> Products { get; set; }
-    }
+
+        }
 }

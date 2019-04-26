@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WarmeBakker.Migrations
 {
-    public partial class initialDB : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -98,7 +98,7 @@ namespace WarmeBakker.Migrations
                 name: "Product",
                 columns: table => new
                 {
-                    Id = table.Column<long>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: true),
                     Price = table.Column<decimal>(type: "decimal(5, 2)", nullable: false),
@@ -127,7 +127,8 @@ namespace WarmeBakker.Migrations
                     Quantity = table.Column<int>(nullable: false),
                     UnitPrice = table.Column<decimal>(nullable: false),
                     ProductId = table.Column<long>(nullable: false),
-                    OrderId = table.Column<long>(nullable: false)
+                    OrderId = table.Column<long>(nullable: false),
+                    ProductId1 = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -139,11 +140,11 @@ namespace WarmeBakker.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_OrderLine_Product_ProductId",
-                        column: x => x.ProductId,
+                        name: "FK_OrderLine_Product_ProductId1",
+                        column: x => x.ProductId1,
                         principalTable: "Product",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
@@ -157,9 +158,9 @@ namespace WarmeBakker.Migrations
                 column: "OrderId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_OrderLine_ProductId",
+                name: "IX_OrderLine_ProductId1",
                 table: "OrderLine",
-                column: "ProductId");
+                column: "ProductId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Product_CategoryId1",

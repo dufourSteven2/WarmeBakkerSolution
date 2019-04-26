@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WarmeBakker.Data;
 
 namespace WarmeBakker.Migrations
 {
-    [DbContext(typeof(IBakkerRepository))]
-    partial class WarmeBakkerContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(WarmeBakkerContext))]
+    [Migration("20190426124439_initial")]
+    partial class initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -113,6 +115,8 @@ namespace WarmeBakker.Migrations
 
                     b.Property<long>("ProductId");
 
+                    b.Property<int?>("ProductId1");
+
                     b.Property<int>("Quantity");
 
                     b.Property<decimal>("UnitPrice");
@@ -121,14 +125,14 @@ namespace WarmeBakker.Migrations
 
                     b.HasIndex("OrderId");
 
-                    b.HasIndex("ProductId");
+                    b.HasIndex("ProductId1");
 
                     b.ToTable("OrderLine");
                 });
 
             modelBuilder.Entity("WarmeBakkerLib.Product", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -182,8 +186,7 @@ namespace WarmeBakker.Migrations
 
                     b.HasOne("WarmeBakkerLib.Product", "Product")
                         .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("ProductId1");
                 });
 
             modelBuilder.Entity("WarmeBakkerLib.Product", b =>

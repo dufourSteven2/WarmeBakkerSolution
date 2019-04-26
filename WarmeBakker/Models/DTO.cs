@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WarmeBakkerLib;
 
 namespace WarmeBakker.Models
 {
@@ -9,7 +10,7 @@ namespace WarmeBakker.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string CategoryName { get; set; }
+        public Category Category { get; set; }
     }
 
     public class ProductDetailDTO
@@ -26,5 +27,6 @@ namespace WarmeBakker.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public Category HeadCategory { get; set; }
     }
 }

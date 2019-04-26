@@ -7,7 +7,7 @@ namespace WarmeBakkerLib
 {
     public class Product
     {
-        public long Id { get; set; }
+        public int Id { get; set; }
 
         public string Name { get; set; }
         [Column(TypeName = "decimal(5, 2)")]
@@ -16,8 +16,7 @@ namespace WarmeBakkerLib
         public bool Highlight { get; set; }
 
         //Foreign Key
-        public long CategoryId { get; set; }
-
+        public int CategoryId { get; set; }
         //Navigation Property
         public virtual Category Category { get; set; }
     }

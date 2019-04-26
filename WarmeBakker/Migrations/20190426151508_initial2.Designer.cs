@@ -9,9 +9,9 @@ using WarmeBakker.Data;
 
 namespace WarmeBakker.Migrations
 {
-    [DbContext(typeof(IBakkerRepository))]
-    [Migration("20190425085502_initialDB")]
-    partial class initialDB
+    [DbContext(typeof(WarmeBakkerContext))]
+    [Migration("20190426151508_initial2")]
+    partial class initial2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -115,6 +115,8 @@ namespace WarmeBakker.Migrations
 
                     b.Property<long>("ProductId");
 
+                    b.Property<int?>("ProductId1");
+
                     b.Property<int>("Quantity");
 
                     b.Property<decimal>("UnitPrice");
@@ -123,20 +125,18 @@ namespace WarmeBakker.Migrations
 
                     b.HasIndex("OrderId");
 
-                    b.HasIndex("ProductId");
+                    b.HasIndex("ProductId1");
 
                     b.ToTable("OrderLine");
                 });
 
             modelBuilder.Entity("WarmeBakkerLib.Product", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<long>("CategoryId");
-
-                    b.Property<int?>("CategoryId1");
+                    b.Property<int>("CategoryId");
 
                     b.Property<string>("Description");
 
@@ -149,7 +149,7 @@ namespace WarmeBakker.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CategoryId1");
+                    b.HasIndex("CategoryId");
 
                     b.ToTable("Product");
                 });
@@ -184,15 +184,15 @@ namespace WarmeBakker.Migrations
 
                     b.HasOne("WarmeBakkerLib.Product", "Product")
                         .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("ProductId1");
                 });
 
             modelBuilder.Entity("WarmeBakkerLib.Product", b =>
                 {
                     b.HasOne("WarmeBakkerLib.Category", "Category")
                         .WithMany("Products")
-                        .HasForeignKey("CategoryId1");
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

@@ -1,8 +1,10 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WarmeBakker.Models;
 using WarmeBakkerLib;
 
 namespace WarmeBakker.Data
@@ -23,7 +25,11 @@ namespace WarmeBakker.Data
             try
             {
                 _logger.LogInformation("GetAllProducts was called");
-                return _ctx.Products.OrderBy(p => p.Category).ToList();
+
+                return _ctx.Products
+                    .Include(c => c.Category)
+                    .Where(p => p.Category.HeadCategory.Publication == true  )
+                    .ToList();
             }
             catch (Exception ex)
             {

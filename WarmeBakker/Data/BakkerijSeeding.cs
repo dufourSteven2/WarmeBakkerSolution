@@ -24,9 +24,9 @@ namespace WarmeBakker.Data
                 //Create Data
                 var headCategories = new Category[]
            {
-                new Category{Name="Brood", Description="alle soorten brood"},
-                new Category{Name="Taarten", Description="alle soorten taarten"},
-                 new Category{Name="Boterkoeken", Description="alle soorten boterkoeken"}
+                new Category{Name="Brood", Description="alle soorten brood", Publication = true},
+                new Category{Name="Taarten", Description="alle soorten taarten", Publication = true},
+                 new Category{Name="Boterkoeken", Description="alle soorten boterkoeken", Publication = false}
            };
                 foreach (Category c in headCategories)
                 {
@@ -38,7 +38,7 @@ namespace WarmeBakker.Data
                 {
             new Category{ Name="Wit Brood", Description = "Alle Wit brood word op steen gebakken", HeadCategoryId = 1},
             new Category{ Name="Chocolade taart", Description = "Alle taarten met chocolade", HeadCategoryId = 2},
-            new Category{ Name="Boterkoeken", Description = "Alle brood word op steen gebakken", HeadCategoryId = 3}
+            new Category{ Name="Vetbommen", Description = "Alle brood word op steen gebakken", HeadCategoryId = 3}
 
                 };
                 foreach (Category c in categories)
@@ -51,14 +51,14 @@ namespace WarmeBakker.Data
 
                 var products = new Product[]
                 {
-            new Product{ Name = "klein wit" , Price = 2.25m,Description = "Wit brood ongezouten op steengebakken",  CategoryId = 1, Highlight=false},
-            new Product{ Name = "Met slagroom" , Price = 2.25m, Description = "Een caloriebom", CategoryId = 2, Highlight=false},
-            new Product{ Name = "Hoorntje" , Price = 2.25m,Description = "Wit brood ongezouten op steengebakken", CategoryId = 3, Highlight=false},
-            new Product{ Name = "Bruin" , Price = 2.25m,Description = "Wit brood ongezouten op steengebakken", CategoryId = 1, Highlight=false},
-            new Product{ Name = "Groot wit" , Price = 2.25m,Description = "Voor de grote honger een ongezouten op steengebakken", CategoryId = 1, Highlight=false},
-            new Product{ Name = "Vierkant wit" , Price = 2.25m,Description = "Wit brood ongezouten op steengebakken", CategoryId = 1, Highlight=false},
-            new Product{ Name = "Acht" , Price = 2.25m,Description = "Wit brood ongezouten op steengebakken", CategoryId = 3, Highlight=false},
-            new Product{ Name = "Suisse" , Price = 2.25m,Description = "Wit brood ongezouten op steengebakken", CategoryId = 3, Highlight=false }
+            new Product{ Name = "klein wit" , Price = 2.25m,Description = "Wit brood ongezouten op steengebakken",  CategoryId = 4, Highlight=false},
+            new Product{ Name = "Met slagroom" , Price = 2.25m, Description = "Een caloriebom", CategoryId = 6, Highlight=false},
+            new Product{ Name = "Hoorntje" , Price = 2.25m,Description = "Wit brood ongezouten op steengebakken", CategoryId = 5, Highlight=false},
+            new Product{ Name = "Bruin" , Price = 2.25m,Description = "Wit brood ongezouten op steengebakken", CategoryId = 4, Highlight=false},
+            new Product{ Name = "Groot wit" , Price = 2.25m,Description = "Voor de grote honger een ongezouten op steengebakken", CategoryId = 4, Highlight=false},
+            new Product{ Name = "Vierkant wit" , Price = 2.25m,Description = "Wit brood ongezouten op steengebakken", CategoryId = 6, Highlight=false},
+            new Product{ Name = "Acht" , Price = 2.25m,Description = "Wit brood ongezouten op steengebakken", CategoryId = 5, Highlight=false},
+            new Product{ Name = "Suisse" , Price = 2.25m,Description = "Wit brood ongezouten op steengebakken", CategoryId = 6, Highlight=false }
                 };
                 foreach (Product s in products)
                 {
