@@ -14,6 +14,7 @@ namespace WarmeBakkerLib
         public decimal Price { get; set; }
         public string Description { get; set; }
         public bool Highlight { get; set; }
+        public string Picture { get; set; }
 
         //Foreign Key
         public int CategoryId { get; set; }

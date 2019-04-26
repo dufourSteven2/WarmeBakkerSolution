@@ -28,7 +28,7 @@ namespace WarmeBakker.Data
 
                 return _ctx.Products
                     .Include(c => c.Category)
-                    .Where(p => p.Category.HeadCategory.Publication == true  )
+                    .Where(p => p.Category.HeadCategory.Publication == true)
                     .ToList();
             }
             catch (Exception ex)
