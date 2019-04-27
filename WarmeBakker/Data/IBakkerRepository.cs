@@ -6,7 +6,12 @@ namespace WarmeBakker.Data
 {
     public interface IBakkerRepository
     {
+        //products
         IEnumerable<Product> GetAllProducts();
+        Product GetProductById(int id);
+
+
         IEnumerable<NewsMessages> GetNewsMessages();
+        
     }
 }

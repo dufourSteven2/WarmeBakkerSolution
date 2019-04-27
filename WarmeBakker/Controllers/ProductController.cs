@@ -45,19 +45,21 @@ namespace WarmeBakker.Controllers
             
         }
 
-        public ActionResult<IEnumerable<Product>> Get(int id)
+        [HttpGet("{id:int}")]
+        public ActionResult Get(int id)
         {
             try
             {
-                var product;
-                if (product != null) return Ok(product);
+                var product = _repository.GetProductById(id);
+                if (product != null) return Ok(_mapper.Map<Product, ProductDetailDTO>(product));
                 else return NotFound();
-
+               
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                _logger.LogError($"Failed to get Products: {ex}");
-                return BadRequest("Failed to get Products");
+                _logger.LogError($"Failed to get products: {ex}");
+                return BadRequest("Bad request");
+
             }
         }
     }

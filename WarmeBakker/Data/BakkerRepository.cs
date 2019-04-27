@@ -52,5 +52,23 @@ namespace WarmeBakker.Data
                 return null;
             }
         }
+
+        public Product GetProductById(int id)
+        {
+            try
+            {
+                return _ctx.Products
+                    .Include(c => c.Category)
+                     .Where(p=> p.Id == id)
+                     .FirstOrDefault();
+
+            }
+            catch(Exception ex)
+            {
+                _logger.LogError($"Failed to get the news messages that can show this day: {ex}");
+                return null;
+            }
+
+        }
     }
 }
