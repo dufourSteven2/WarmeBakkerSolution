@@ -135,6 +135,38 @@ namespace WarmeBakker.Data
              new Product{ Name = "Suikerbrood" , Price =2.75m, Description = "", CategoryId = 21, Highlight=false},
              new Product{ Name = "Chocoladebrood" , Price = 2.75m, Description = "", CategoryId = 21, Highlight=false},
 
+             //boterkoeken
+             new Product{ Name = "Gewone boterkoek" , Price = 1.15m, Description = "", CategoryId = 15, Highlight=false},
+             new Product{ Name = "Boterkoek met rozijn" , Price = 1.15m, Description = "", CategoryId = 15, Highlight=false},
+             new Product{ Name = "Chocoladekoek" , Price = 1.15m, Description = "", CategoryId = 15, Highlight=false},
+             new Product{ Name = "Croissant" , Price = 1.15m, Description = "", CategoryId = 15, Highlight=false},
+
+             //koffiekoeken
+             new Product{ Name = "Croissant Frangipanne" , Price = 1.15m, Description = "", CategoryId = 14, Highlight=false},
+             new Product{ Name = "Croisant chocolade" , Price = 1.15m, Description = "", CategoryId = 14, Highlight=false},
+             new Product{ Name = "Frangipanne koek" , Price = 1.15m, Description = "m", CategoryId = 14, Highlight=false},
+             new Product{ Name = "Appelkoek (moes)" , Price = 1.15m, Description = "Appelkoek met appelmoes.", CategoryId = 14, Highlight=false},
+             new Product{ Name = "Appelschijfjes" , Price = 1.15m, Description = "Appelkoek met pudding.", CategoryId = 14, Highlight=false},
+             new Product{ Name = "Kriekenkoek" , Price = 1.15m, Description = "", CategoryId = 14, Highlight=false},
+             new Product{ Name = "Abrikozenkoek" , Price = 1.15m, Description = "", CategoryId = 14, Highlight=false},
+             new Product{ Name = "Ananaskoek" , Price = 1.15m, Description = "", CategoryId = 14, Highlight=false},
+             new Product{ Name = "Banaan chocolade" , Price = 1.15m, Description = "Koek met bananencreme en chocoladestukjes erin.", CategoryId = 14, Highlight=false},
+             new Product{ Name = "Ronde suisse" , Price = 1.15m, Description = "Ronde koek met rozijnen", CategoryId = 14, Highlight=false},
+             new Product{ Name = "Lange suisse" , Price = 1.15m, Description = "Lange koek met rozijnen.", CategoryId = 14, Highlight=false},
+             new Product{ Name = "Chocolade suis" , Price = 1.15m, Description = "Lange koek met chocolade", CategoryId = 14, Highlight=false},
+             new Product{ Name = "Achtkoek" , Price = 1.15m, Description = "", CategoryId = 14, Highlight=false},
+             new Product{ Name = "Strik pudding" , Price = 1.15m, Description = "Koek met ingebakken pudding.", CategoryId = 14, Highlight=false},
+             new Product{ Name = "Driehoek" , Price = 1.15m, Description = "Koek toegevouwd met ingebakken pudding.", CategoryId = 14, Highlight=false},
+
+             //puddingkoeken
+             new Product{ Name = "Croissant Créme" , Price = 1.30m, Description = "", CategoryId = 13, Highlight=false},
+             new Product{ Name = "Vierkant créme bloem" , Price = 1.30m, Description = "Vierkant koek met patisserie créme en bloemsuiker erop", CategoryId = 13, Highlight=false},
+             new Product{ Name = "Vierkant créme chocolade" , Price = 1.30m, Description = "Vierkant koek met patisserie créme en chocolade erop", CategoryId = 13, Highlight=false},
+
+
+
+             new Product{ Name = "Met slagroom" , Price = 2.25m, Description = "Een caloriebom", CategoryId = 6, Highlight=false},
+
              new Product{ Name = "Met slagroom" , Price = 2.25m, Description = "Een caloriebom", CategoryId = 6, Highlight=false},
              new Product{ Name = "Met slagroom" , Price = 2.25m, Description = "Een caloriebom", CategoryId = 6, Highlight=false},
             new Product{ Name = "Met slagroom" , Price = 2.25m, Description = "Een caloriebom", CategoryId = 6, Highlight=false},
