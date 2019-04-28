@@ -40,7 +40,7 @@ namespace WarmeBakker.Data
                 {
                     //headcattegory brood
             new Category{ Name="Wit Brood", Description = "Alle soorten wit broot.", HeadCategoryId = 1},
-            new Category{ Name="Brui Brood", Description = "Alle soorten bruin brood.", HeadCategoryId = 1},
+            new Category{ Name="Bruin Brood", Description = "Alle soorten bruin brood.", HeadCategoryId = 1},
             new Category{ Name="Brood Speciaal", Description = "Alle speeciale soorten brood.", HeadCategoryId = 1},
             new Category{ Name="Brood Weekend", Description = "Deze broden enkel verkrijbaar in het weekend", HeadCategoryId = 1},
 
@@ -80,7 +80,63 @@ namespace WarmeBakker.Data
 
                 var products = new Product[]
                 {
-            new Product{ Name = "klein wit" , Price = 2.25m,Description = "Wit brood ongezouten op steengebakken",  CategoryId = 4, Highlight=false},
+
+                    //all white bread
+            new Product{ Name = "Wit vierkant" , Price = 1.60m,Description = "Wit vierkant.",  CategoryId = 6, Highlight=false},
+            new Product{ Name = "Wit rond" , Price = 1.60m,Description = "Wit rond.",  CategoryId = 6, Highlight=false},
+            new Product{ Name = "Wit galet" , Price = 1.60m,Description = "Wit galet.",  CategoryId = 6, Highlight=false},
+            new Product{ Name = "Wit sesam" , Price = 1.75m,Description = "Wit sesam.",  CategoryId = 6, Highlight=false},
+
+
+                    //all brown bread
+            new Product{ Name = "Bruin vierkant" , Price = 1.60m, Description = "Bruin vierkant.", CategoryId = 23, Highlight=false},
+            new Product{ Name = "Bruin rond" , Price = 1.60m, Description = "Bruin rond.", CategoryId = 23, Highlight=false},
+            new Product{ Name = "Bruin galet" , Price = 1.60m, Description = "Bruin galet", CategoryId = 23, Highlight=false},
+
+
+                    //all special bread
+             new Product{ Name = "Finesse" , Price = 1.75m, Description = "Donker meegranen.", CategoryId = 22, Highlight=false},
+             new Product{ Name = "Abdij" , Price = 1.75m, Description = "Grob brood met tarwevlokken", CategoryId = 22, Highlight=false},
+             new Product{ Name = "Crunchy" , Price = 1.75m, Description = "Meergranen met krokante granen", CategoryId = 22, Highlight=false},
+             new Product{ Name = "Pani Grain" , Price = 1.75m, Description = "Fijn meergranen, smaak meergranen en noten.", CategoryId = 22, Highlight=false},
+             new Product{ Name = "Pani vita" , Price = 1.75m, Description = "Grof meegragnen, zonnebloem en pompoenpitten.", CategoryId = 22, Highlight=false},
+             new Product{ Name = "7-Granen" , Price = 1.75m, Description = "Fijn meegranen, textuur tussen bruin en volkoren.", CategoryId = 22, Highlight=false},
+             new Product{ Name = "Alpenfit" , Price = 1.75m, Description = "Donker meegranen.", CategoryId = 22, Highlight=false},
+             new Product{ Name = "Grof volkoren" , Price = 1.75m, Description = "Volkoren met extra zemelen en vezels.", CategoryId = 22, Highlight=false},
+             new Product{ Name = "Zonnebrood" , Price = 1.75m, Description = "Wit meegranen en zonnebloempitten.", CategoryId = 22, Highlight=false},
+             new Product{ Name = "Kappers" , Price = 1.75m, Description = "Donker meegranen", CategoryId = 22, Highlight=false},
+             new Product{ Name = "Speltmeel" , Price = 1.75m, Description = "30% spelt 70% tarwe.", CategoryId = 22, Highlight=false},
+             new Product{ Name = "Maya" , Price = 1.75m, Description = "Donker meegranen met zonnebloempitten.", CategoryId = 22, Highlight=false},
+             new Product{ Name = "Bolero" , Price = 1.75m, Description = "Wit meergranen, maïsbolletjes en lijnzaad.", CategoryId = 22, Highlight=false},
+             new Product{ Name = "Hoevebrood" , Price = 1.75m, Description = "Zacht boerenbrood.", CategoryId = 22, Highlight=false},
+             new Product{ Name = "Volkoren" , Price = 1.75m, Description = "Volkoren.", CategoryId = 22, Highlight=false},
+             new Product{ Name = "Roggebrood" , Price = 1.75m, Description = "", CategoryId = 22, Highlight=false},
+             new Product{ Name = "Duobrood" , Price = 1.75m, Description = "Helft wit, helft bruin.", CategoryId = 22, Highlight=false},
+             new Product{ Name = "Graaneveld" , Price = 1.75m, Description = "Fijn meergranen.", CategoryId = 22, Highlight=false},
+             new Product{ Name = "Bruin rozijn" , Price = 1.75m, Description = "Bruin brood met rozijnen.", CategoryId = 6, Highlight=false},
+             new Product{ Name = "Meergranen" , Price =1.75m, Description = "", CategoryId = 22, Highlight=false},
+             new Product{ Name = "Ardeens" , Price =1.75m, Description = "Wit brood met tarwevlokken.", CategoryId = 22, Highlight=false},
+             new Product{ Name = "Malt" , Price = 1.75m, Description = "Fijn meergranen", CategoryId = 22, Highlight=false},
+             new Product{ Name = "Boerenbrood" , Price = 2.35m, Description = "Brood met krokante korst.", CategoryId = 22, Highlight=false},
+             new Product{ Name = "Vita plus" , Price = 2.65m, Description = "Vokoren en havermout.", CategoryId = 22, Highlight=false},
+             new Product{ Name = "Spelt 95%" , Price = 2.65m, Description = "95% spelt, 5% havermout.", CategoryId = 22, Highlight=false},
+             new Product{ Name = "Spelt / veenbes" , Price = 2.65m, Description = "Speltbrood met veenbessen.", CategoryId = 22, Highlight=false},
+             new Product{ Name = "Fjord" , Price = 2.65m, Description = "Donker meergranen met veel granen.", CategoryId = 22, Highlight=false},
+             new Product{ Name = "Quinoa" , Price = 2.65m, Description = "Grof meergranen met quionoa en grove granen.", CategoryId = 22, Highlight=false},
+             new Product{ Name = "Prolijntje" , Price = 2.90m, Description = "Koolhydraatarm brood.", CategoryId = 22, Highlight=false},
+             new Product{ Name = "Appeltjesbrood" , Price = 4.10m, Description = "Zoet brood met appels en rozijnen", CategoryId = 22, Highlight=false},
+
+             //all weekend bread
+             new Product{ Name = "Notenbrood" , Price = 2.30m, Description = "Bruin brood met noten", CategoryId = 21, Highlight=false},
+             new Product{ Name = "Veenbes/hazelnoot" , Price = 3.25m, Description = "Bruin brood met veenbessen en hazelnoten", CategoryId = 21, Highlight=false},
+             new Product{ Name = "Roggemafke" , Price = 1.85m, Description = "Bruin rond broodje met rozijnen", CategoryId = 6, Highlight=false},
+             new Product{ Name = "Koekebrood" , Price = 2.65m, Description = "", CategoryId = 21, Highlight=false},
+             new Product{ Name = "Rozijnenbrood" , Price = 2.75m, Description = "", CategoryId = 21, Highlight=false},
+             new Product{ Name = "Suikerbrood" , Price =2.75m, Description = "", CategoryId = 21, Highlight=false},
+             new Product{ Name = "Chocoladebrood" , Price = 2.75m, Description = "", CategoryId = 21, Highlight=false},
+
+             new Product{ Name = "Met slagroom" , Price = 2.25m, Description = "Een caloriebom", CategoryId = 6, Highlight=false},
+             new Product{ Name = "Met slagroom" , Price = 2.25m, Description = "Een caloriebom", CategoryId = 6, Highlight=false},
             new Product{ Name = "Met slagroom" , Price = 2.25m, Description = "Een caloriebom", CategoryId = 6, Highlight=false},
             new Product{ Name = "Hoorntje" , Price = 2.25m,Description = "Wit brood ongezouten op steengebakken", CategoryId = 5, Highlight=false},
             new Product{ Name = "Bruin" , Price = 2.25m,Description = "Wit brood ongezouten op steengebakken", CategoryId = 4, Highlight=false},
