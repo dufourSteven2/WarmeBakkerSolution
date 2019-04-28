@@ -163,19 +163,56 @@ namespace WarmeBakker.Data
              new Product{ Name = "Vierkant créme bloem" , Price = 1.30m, Description = "Vierkant koek met patisserie créme en bloemsuiker erop", CategoryId = 13, Highlight=false},
              new Product{ Name = "Vierkant créme chocolade" , Price = 1.30m, Description = "Vierkant koek met patisserie créme en chocolade erop", CategoryId = 13, Highlight=false},
 
+             //Drooggebak
+             new Product{ Name = "Confituurtaart" , Price = 1.70m, Description = "", CategoryId = 20, Highlight=false},
+             new Product{ Name = "Appeltaart" , Price = 1.95m, Description = "", CategoryId = 20, Highlight=false},
+             new Product{ Name = "Frangipannetaart" , Price = 1.95m, Description = "", CategoryId = 20, Highlight=false},
+             new Product{ Name = "Rijsttaart" , Price = 1.70m, Description = "", CategoryId = 20, Highlight=false},
+             new Product{ Name = "Flan nootjes" , Price = 2.50m, Description = "", CategoryId = 20, Highlight=false},
+             new Product{ Name = "Meille feuille" , Price = 1.95m, Description = "", CategoryId = 6, Highlight=false},
+             new Product{ Name = "Bretoense appeltaart" , Price = 1.95m, Description = "Zanddeeg, stukjes appel en vanillebotercréme.", CategoryId = 20, Highlight=false},
+             new Product{ Name = "Frangipannetaart" , Price = 1.95m, Description = "", CategoryId = 20, Highlight=false},
+             new Product{ Name = "Peren Frangipanne" , Price = 1.95m, Description = "Frangipannetaart met peren.", CategoryId = 20, Highlight=false},
+             new Product{ Name = "Appelfrangipanne" , Price = 1.95m, Description = "Frangipannentaart met appels.", CategoryId = 20, Highlight=false},
+             new Product{ Name = "Rode vruchten frangipanne" , Price = 1.95m, Description = "Frangipannentaart met rode vruchten", CategoryId = 20, Highlight=false},
 
+             //chocoladetaarten
+             new Product{ Name = "Zwarte woud" , Price = 3.50m, Description = "Chocoladebiscuit, chocolademousse, vanillemousse en omwenteld in.", CategoryId = 19, Highlight=false},
+             new Product{ Name = "Chocoladetaart" , Price = 3.50m, Description = "Melkchocolademousse, biscuit en feuilletine.", CategoryId = 19, Highlight=false},
+             new Product{ Name = "Farao" , Price = 3.50m, Description = "Chocoladebiscuit, crème brulée, chocolademousse en feuilletine.", CategoryId = 19, Highlight=false},
+             new Product{ Name = "Trois chocolats" , Price = 3.50m, Description = "Fondantmousse, melkchocolademousse biscuit, witte chocolademousse en feuilletine.", CategoryId = 19, Highlight=false},
+             new Product{ Name = "Javanais" , Price = 3.00m, Description = "fijn amandelbiscuit in laagjes met mokkaboterroom", CategoryId = 19, Highlight=false},
+             new Product{ Name = "Miserable" , Price = 3.00m, Description = "", CategoryId = 19, Highlight=false},
+             new Product{ Name = "Dulcey" , Price = 3.50m, Description = "Dulceymousse, coulis van abrikoos en passie donkere chocomousse", CategoryId = 19, Highlight=false},
+             new Product{ Name = "Noisette" , Price = 3.50m, Description = "Biscuit, pralinécrème en donkere chocolademousse", CategoryId = 19, Highlight=false},
+             new Product{ Name = "Forêt noire" , Price = 3.50m, Description = "Chocoladebiscuit, cremeux van kirsch en kersen, donkere chocolademousse", CategoryId = 19, Highlight=false},
 
-             new Product{ Name = "Met slagroom" , Price = 2.25m, Description = "Een caloriebom", CategoryId = 6, Highlight=false},
+             //Fruittaarten
+             new Product{ Name = "Fruittaart zanddeeg" , Price = 3.50m, Description = "Opgevuld met créme price (slagroom met pudding gemengd).", CategoryId = 18, Highlight=false},
+             new Product{ Name = "Fruittaart bladerdeeg" , Price = 3.50m, Description = "Opgevuld met banketbakkersroom.", CategoryId = 18, Highlight=false},
+             new Product{ Name = "Aardbei zanddeeg" , Price = 3.50m, Description = "Opgevuld met créme price (slagroom met pudding gemengd).", CategoryId = 18, Highlight=false},
+             new Product{ Name = "Aardbei bladerdeeg" , Price = 3.50m, Description = "Opgevuld met banketbakkersroom", CategoryId = 18, Highlight=false},
+             new Product{ Name = "Frambozentaart zanddeeg" , Price =3.50m, Description = "frambozen met créme price en kleine hoeveelheid frambozenlikeur", CategoryId =18, Highlight=false},
+             new Product{ Name = "Bananentaart zanddeeg" , Price = 3.50m, Description = "Opgevuld met créme price", CategoryId = 18, Highlight=false},
 
-             new Product{ Name = "Met slagroom" , Price = 2.25m, Description = "Een caloriebom", CategoryId = 6, Highlight=false},
-             new Product{ Name = "Met slagroom" , Price = 2.25m, Description = "Een caloriebom", CategoryId = 6, Highlight=false},
-            new Product{ Name = "Met slagroom" , Price = 2.25m, Description = "Een caloriebom", CategoryId = 6, Highlight=false},
-            new Product{ Name = "Hoorntje" , Price = 2.25m,Description = "Wit brood ongezouten op steengebakken", CategoryId = 5, Highlight=false},
-            new Product{ Name = "Bruin" , Price = 2.25m,Description = "Wit brood ongezouten op steengebakken", CategoryId = 4, Highlight=false},
-            new Product{ Name = "Groot wit" , Price = 2.25m,Description = "Voor de grote honger een ongezouten op steengebakken", CategoryId = 4, Highlight=false},
-            new Product{ Name = "Vierkant wit" , Price = 2.25m,Description = "Wit brood ongezouten op steengebakken", CategoryId = 6, Highlight=false},
-            new Product{ Name = "Acht" , Price = 2.25m,Description = "Wit brood ongezouten op steengebakken", CategoryId = 5, Highlight=false},
-            new Product{ Name = "Suisse" , Price = 2.25m,Description = "Wit brood ongezouten op steengebakken", CategoryId = 6, Highlight=false }
+             //Bavarois / marsepein
+            new Product{ Name = "Banaan/marsepein" , Price = 3.50m, Description = "Zanddeeg, patisseriecrème, banaan.", CategoryId = 17, Highlight=false},
+            new Product{ Name = "Framboos/marsepein" , Price = 3.50m, Description = "Zanddeeg, patisseriecrème en framboos, amandelbiscuit en marsepein.", CategoryId = 17, Highlight=false},
+            new Product{ Name = "Bavarois aardbeien" , Price = 3.00m, Description = "Aardbeienmousse, progress en amandelbiscuit.", CategoryId = 17, Highlight=false},
+            new Product{ Name = "St-Honoré Kriek" , Price = 2.95m, Description = "", CategoryId = 17, Highlight=false},
+            new Product{ Name = "St-Honoré aarbeid" , Price = 2.95m, Description = "", CategoryId = 17, Highlight=false},
+            new Product{ Name = "St-Honoré ananas" , Price = 2.95m, Description = "", CategoryId = 17, Highlight=false},
+            new Product{ Name = "Framboise" , Price = 3.50m, Description = "Coulis van aardbei en mascarponemousse", CategoryId = 17, Highlight=false},
+
+            //Bisquit
+            new Product{ Name = "Slagroom vers fruit" , Price = 3.50m, Description = "Biscuit, slagroom, ananas en framboos ertussen en vers fruit erop.", CategoryId = 16, Highlight=false},
+            new Product{ Name = "Slagroom ananas" , Price = 3.00m, Description = "Biscuit, slagroom, ananas en framboos ertussen.", CategoryId = 16, Highlight=false},
+            new Product{ Name = "Slagroom aarbei" , Price = 3.50m, Description = "Biscuit, slagroom en aardbei ertussen.", CategoryId = 16, Highlight=false},
+            new Product{ Name = "Geflambeerde biscuit" , Price = 3.50m, Description = "Biscuit, chipolatémousse, framboos en geflambeerde merinque.", CategoryId = 16, Highlight=false},
+            new Product{ Name = "Créme au beurre mokka" , Price = 3.00m, Description = "Biscuit met créme au beurre mokka ertussen.", CategoryId = 16, Highlight=false},
+            new Product{ Name = "Créme au beurre praliné" , Price = 3.00m, Description = "Biscuit met créme au beurre praliné ertussen.", CategoryId = 16, Highlight=false},
+            new Product{ Name = "Créme au beurre vanille" , Price = 3.00m, Description = "", CategoryId = 16, Highlight=false},
+
                 };
                 foreach (Product s in products)
                 {
