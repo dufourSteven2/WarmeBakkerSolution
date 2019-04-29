@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using WarmeBakker.Data;
 using WarmeBakkerLib;
 
+
+
 namespace WarmeBakker.Controllers
 {
     public class ProductsController : Controller
@@ -70,7 +72,7 @@ namespace WarmeBakker.Controllers
         }
 
         // GET: Products/Details/5
-        public async Task<IActionResult> Details(long? id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
@@ -91,7 +93,13 @@ namespace WarmeBakker.Controllers
         // GET: Products/Create
         public IActionResult Create()
         {
+            PopulateCategoryDropDownList();
             ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id");
+            return View();
+        }
+        public ActionResult Create2()
+        {
+            //PopulateCategoryDropDownList();
             return View();
         }
 
@@ -118,25 +126,39 @@ namespace WarmeBakker.Controllers
                     "Try again, and if the problem persists " +
                     "see your system administrator.");
             }
+            PopulateCategoryDropDownList(product.CategoryId);
             //ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id", product.CategoryId);
             return View(product);
         }
 
         // GET: Products/Edit/5
-        public async Task<IActionResult> Edit(long? id)
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
-
-            var product = await _context.Products.FindAsync(id);
+            Product product = _context.Products.Find(id);
             if (product == null)
             {
                 return NotFound();
             }
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id", product.CategoryId);
+            PopulateCategoryDropDownList(product.CategoryId);
             return View(product);
+
+
+            //if (id == null)
+            //{
+            //    return NotFound();
+            //}
+
+            //var product = await _context.Products.FindAsync(id);
+            //if (product == null)
+            //{
+            //    return NotFound();
+            //}
+            //ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id", product.Category.Name);
+            //return View(product);
         }
 
         // POST: Products/Edit/5
@@ -145,7 +167,7 @@ namespace WarmeBakker.Controllers
         [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
         //public async Task<IActionResult> Edit(long id, [Bind("Id,Name,Price,Description,CategoryId")] Product product)
-        public async Task<IActionResult> EditPost(long? id)
+        public async Task<IActionResult> EditPost(int? id)
         {
             if (id == null)
             {
@@ -155,7 +177,7 @@ namespace WarmeBakker.Controllers
             if (await TryUpdateModelAsync<Product>(
                 productToUpdate,
                 "",
-                s => s.Name, s => s.Description, s => s.Price))
+                s => s.Name, s => s.Description, s => s.Price, s => s.CategoryId))
             {
                 try
                 {
@@ -170,6 +192,9 @@ namespace WarmeBakker.Controllers
                         "see your system administrator.");
                 }
             }
+            //
+            PopulateCategoryDropDownList(productToUpdate.CategoryId);
+            //
             return View(productToUpdate);
             //if (id != product.Id)
             //{
@@ -199,6 +224,15 @@ namespace WarmeBakker.Controllers
             //ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id", product.CategoryId);
             //return View(product);
         }
+
+        private void PopulateCategoryDropDownList(object selectedCategory = null)
+        {
+            var departmentsQuery = from d in _context.Products
+                                   orderby d.Name
+                                   select d;
+            ViewBag.CategoryId = new SelectList(departmentsQuery, "CategoryId", "Name", selectedCategory);
+        }
+
 
         // GET: Products/Delete/5
         //public async Task<IActionResult> Delete(long? id)

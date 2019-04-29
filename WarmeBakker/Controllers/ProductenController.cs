@@ -20,10 +20,53 @@ namespace WarmeBakker.Controllers
         }
 
         // GET: Producten
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
-            var warmeBakkerContext = _context.Products.Include(p => p.Category);
-            return View(await warmeBakkerContext.ToListAsync());
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["PriceSortParm"] = sortOrder == "Price" ? "price_desc" : "Price";
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewData["CurrentFilter"] = searchString;
+
+            var products = from s in _context.Products.Include(p => p.Category)
+                           select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                products = products.Where(s => s.Category.Name.Contains(searchString));
+                //(s => s.Category.Name.Contains(searchString) ||s =>s.Price.Contains(searchstring)) //kan ook is dan extra filter
+            }
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    products = products.OrderByDescending(p => p.Category.Name);
+                    break;
+                case "Price":
+                    products = products.OrderBy(s => s.Price);
+                    break;
+                case "price_desc":
+                    products = products.OrderByDescending(s => s.Price);
+                    break;
+                default:
+                    products = products.OrderBy(s => s.Description);
+                    break;
+            }
+            int pageSize = 3;
+            return View(await PaginatedList<Product>.CreateAsync(products.AsNoTracking(), page ?? 1, pageSize));
+
+            //return View(await products.AsNoTracking().ToListAsync());
+
+            //var warmeBakkerContext = _context.Products.Include(p => p.Category);
+            //return View(await warmeBakkerContext.ToListAsync());
         }
 
         // GET: Producten/Details/5
@@ -65,7 +108,7 @@ namespace WarmeBakker.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id", product.CategoryId);
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id", product.Category.Name);
             return View(product);
         }
 
