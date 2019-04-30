@@ -59,6 +59,7 @@ namespace WarmeBakker.Data
             {
                 return _ctx.Products
                     .Include(c => c.Category)
+                    .Include(c=> c.Category.HeadCategory)
                      .Where(p=> p.Id == id)
                      .FirstOrDefault();
 

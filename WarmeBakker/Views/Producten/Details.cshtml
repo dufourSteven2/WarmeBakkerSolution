@@ -35,14 +35,22 @@
             @Html.DisplayFor(model => model.Highlight)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Category)
+            @Html.DisplayNameFor(model => model.Category.Name)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Category.Id)
+            @Html.DisplayFor(model => model.Category.Name)
         </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Category.HeadCategory.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Category.HeadCategory.Name)
+        </dd>
+
     </dl>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+<div class="btn-group-lg">
+    <a class="btn btn-primary btn" asp-action="Edit" asp-route-id="@Model.Id">Edit</a> 
+    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
     <a asp-action="Index">Back to List</a>
 </div>

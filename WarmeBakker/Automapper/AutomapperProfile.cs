@@ -16,9 +16,18 @@ namespace WarmeBakker.Automapper
             {
                 CreateMap<Product, ProductDTO>().ReverseMap();
 
-                CreateMap<Product, ProductDetailDTO>().ReverseMap()
-                    .ForMember(dto => dto.Category, conf => conf.MapFrom(gem => gem.CategoryName));
-                   
+
+
+
+                CreateMap<Product, ProductDetailDTO>()
+                .BeforeMap((src, dest) => src.Category.HeadCategory.Name = src.Category.HeadCategory.Name)
+                .AfterMap((src, dest) => dest.HeadCategoryname = dest.HeadCategoryname);
+
+
+
+                ;
+
+
                 CreateMap<Category, CategoryDTO>().ReverseMap();
             });
         }
