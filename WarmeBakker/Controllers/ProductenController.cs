@@ -65,7 +65,7 @@ namespace WarmeBakker.Controllers
                 //    break;
             }
             int pageSize = 15;
-            return View(await PaginatedList<Product>.CreateAsync(products.AsNoTracking(), page ?? 1, pageSize));
+            return View(await PaginatedList<Product>.CreateAsync(products.AsNoTracking().Include(p => p.Category.HeadCategory), page ?? 1, pageSize));
 
             //return View(await products.AsNoTracking().ToListAsync());
 

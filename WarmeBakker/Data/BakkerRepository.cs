@@ -38,6 +38,8 @@ namespace WarmeBakker.Data
             }
         }
 
+
+
         public IEnumerable<NewsMessages> GetNewsMessages()
         {
             try
@@ -65,6 +67,21 @@ namespace WarmeBakker.Data
 
             }
             catch(Exception ex)
+            {
+                _logger.LogError($"Failed to get the news messages that can show this day: {ex}");
+                return null;
+            }
+
+        }
+
+        public IEnumerable<topicsContactForm> Getcontacttopics()
+        {
+            try
+            {
+                return _ctx.topicsContactforms.ToList();
+
+            }
+            catch (Exception ex)
             {
                 _logger.LogError($"Failed to get the news messages that can show this day: {ex}");
                 return null;

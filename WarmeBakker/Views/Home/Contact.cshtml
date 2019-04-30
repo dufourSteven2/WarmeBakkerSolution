@@ -1,4 +1,5 @@
-﻿@model ContactViewModels
+﻿@model ContactViewModels;
+
 
 @{ 
     ViewBag.Title = "Concact Us";
@@ -25,6 +26,7 @@
             <div class="form-group">
                 <label asp-for="Onderwerp">Onderwerp:</label>
                  <input type="text" asp-for="Onderwerp" class="form-control" />
+         
                  <span asp-validation-for="Onderwerp" class="text-danger"></span>
             </div>
             <div class="form-group">

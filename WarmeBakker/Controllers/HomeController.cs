@@ -64,7 +64,8 @@ namespace WarmeBakker.Controllers
         [HttpGet("contact")]
         public IActionResult Contact()
         {
-            return View();
+            var contact = _repository.Getcontacttopics();
+            return View(contact);
         }
 
         [HttpPost("Contact")]

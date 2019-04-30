@@ -36,72 +36,85 @@
     </div>
 </form>
 
+<div>
+    @foreach (var headcat in Model)
+    {
+        int ?i = headcat.Category.HeadCategoryId;
 
-<table class="table">
-    <thead class="thead-dark">
-        <tr>
-            <th scope="col">
-                Naam Product
-
-            </th>
-            <th scope="col">
-                Prijs product
-            </th>
-            <th scope="col">
-                Omschrijving
-
-            </th>
-            <th scope="col">
-                HightLight
-
-            </th>
-            <th scope="col">
-                Category Name
-
-            </th>
-            <th scope="col">
-               Head Category Name
-
-            </th>
-            <th scope="col">
-                Acties
-            </th>
-        </tr>
-
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
+        @if(i == headcat.Category.HeadCategoryId)
         {
+            <h4>@headcat.Category.HeadCategory.Name</h4>
+
             
             
-        <tr itemscope>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Highlight)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category.HeadCategory.Name)
-            </td>
-            <td class="btn-group-lg">
-                <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                <a class="btn btn-info" asp-action="Details" asp-route-id="@item.Id">Details</a>
-                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
         }
-    </tbody>
-</table>
+    }
+</div>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">
+                    Naam Product
+
+                </th>
+                <th scope="col">
+                    Prijs product
+                </th>
+                <th scope="col">
+                    Omschrijving
+
+                </th>
+                <th scope="col">
+                    HightLight
+
+                </th>
+                <th scope="col">
+                    Category Name
+
+                </th>
+                <th scope="col">
+                    Head Category Name
+
+                </th>
+                <th scope="col">
+                    Acties
+                </th>
+            </tr>
+
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+
+
+                <tr itemscope>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Highlight)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Category.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Category.HeadCategory.Name)
+                    </td>
+                    <td class="btn-group-lg">
+                        <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                        <a class="btn btn-info" asp-action="Details" asp-route-id="@item.Id">Details</a>
+                        <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 
 <p>
     <a class="btn btn-success" asp-action="Create">Create New</a>

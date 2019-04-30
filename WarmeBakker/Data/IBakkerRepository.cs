@@ -9,7 +9,7 @@ namespace WarmeBakker.Data
         //products
         IEnumerable<Product> GetAllProducts();
         Product GetProductById(int id);
-
+        IEnumerable<topicsContactForm> Getcontacttopics();
 
         IEnumerable<NewsMessages> GetNewsMessages();
         

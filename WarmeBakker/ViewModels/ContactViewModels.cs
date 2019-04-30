@@ -14,8 +14,7 @@ namespace WarmeBakker.ViewModels
 
 
     {
-   
-    
+
         [Required]
         [MinLength(5)]
         public string Name { get; set; }
@@ -23,7 +22,7 @@ namespace WarmeBakker.ViewModels
         [EmailAddress]
         public string Email { get; set; }
         [Required]
-        public string Onderwerp { get; set; }
+        public string Onderwerp { get;   set; }
         [Required]
         [MaxLength(250, ErrorMessage ="Te groot bericht.")]
         public string Message { get; set; }
