@@ -20,8 +20,8 @@ namespace WarmeBakker.Automapper
 
 
                 CreateMap<Product, ProductDetailDTO>()
-                .BeforeMap((src, dest) => src.Category.HeadCategory.Name = src.Category.HeadCategory.Name)
-                .AfterMap((src, dest) => dest.HeadCategoryname = dest.HeadCategoryname);
+                .BeforeMap((src, dest) => dest.HeadCategoryname =src.Category.Name)
+                .AfterMap((src, dest) => dest.HeadCategoryname = src.Category.HeadCategory.Name );
 
 
 
