@@ -83,7 +83,7 @@ namespace WarmeBakker.Controllers
         }
 
         // GET: Producten/Details/5
-        public async Task<IActionResult> Details(int id)
+        public IActionResult Details(int id)
         {
 
             try
@@ -131,22 +131,33 @@ namespace WarmeBakker.Controllers
 
 
         // GET: Test/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public  IActionResult Edit(int id)
         {
-            if (id == null)
+
+            try
             {
-                return NotFound();
+                var product = _repository.GetProductById(id);
+                if (product != null)
+                {
+                   
+                    ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id", product.Category.Id);
+                    PopulateCategoryDropDownList(product.Category.Id);
+                    return View(_mapper.Map<Product, ProductDetailDTO>(product));
+                }
+                else return NotFound();
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Failed to get product: {ex}");
+                return BadRequest("Bad request");
+
             }
 
-            var product = await _context.Products.FindAsync(id);
-            if (product == null)
-            {
-                return NotFound();
-            }
 
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id", product.CategoryId);
-            PopulateCategoryDropDownList(product.CategoryId);
-            return View(product);
+
+
+           // return View(product);
         }
 
         // POST: Test/Edit/5
@@ -226,10 +237,10 @@ namespace WarmeBakker.Controllers
 
         private void PopulateCategoryDropDownList(object selectedCategory = null)
         {
-            var departmentsQuery = from d in _context.Products
-                                   orderby d.Name
+            var departmentsQuery = from d in _context.Categories
+                                   orderby d.Id
                                    select d;
-            ViewBag.CategoryId = new SelectList(departmentsQuery, "CategoryId", "Name", selectedCategory);
+            ViewBag.CategoryId = new SelectList(departmentsQuery, "Id", "Name", selectedCategory);
         }
 
     }
