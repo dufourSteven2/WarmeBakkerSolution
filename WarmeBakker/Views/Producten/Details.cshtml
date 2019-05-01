@@ -1,4 +1,4 @@
-﻿@model WarmeBakkerLib.Product
+﻿@model WarmeBakker.Models.ProductDetailDTO
 
 @{
     ViewData["Title"] = "Details";
@@ -35,16 +35,16 @@
             @Html.DisplayFor(model => model.Highlight)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Category.Name)
+            @Html.DisplayNameFor(model => model.CategoryName)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Category.Name)
+            @Html.DisplayFor(model => model.CategoryName)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Category.HeadCategory.Name)
+            @Html.DisplayNameFor(model => model.HeadCategoryname)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Category.HeadCategory.Name)
+            @Html.DisplayFor(model => model.HeadCategoryname)
         </dd>
 
     </dl>

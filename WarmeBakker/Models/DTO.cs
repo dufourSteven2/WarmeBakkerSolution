@@ -21,6 +21,8 @@ namespace WarmeBakker.Models
         public decimal Price { get; set; }
         public string Description { get; set; }
         public int CategoryId { get; set; }
+        public bool Highlight { get; set; }
+        public string Picture { get; set; }
         public string CategoryName { get; set; }
         public string HeadCategoryname { get; set; }
     }

@@ -62,7 +62,38 @@ namespace WarmeBakker.Controllers
 
             }
         }
+
+
+        //[HttpPost]
+        //public ActionResult Post([FromBody]ProductDetailDTO productDetail  )
+        //{
+        //    try
+        //    {
+        //        if (ModelState.IsValid)
+        //        {
+        //            var newProduct = _mapper.Map<ProductDetailDTO, Product>();
+
+        //            _repository.AddEntity(newProduct);
+        //            if (_repository.SaveAll())
+        //            {
+        //                var pm = new ProductDetailDTO()
+        //                {
+                          
+        //                    Id = newProduct.Id,
+        //                    Name = newProduct.Name,
+        //                    Price = newProduct.Price,
+        //                    Description = newProduct.Description,
+        //                    Highlight = newProduct.Highlight,
+        //                    Picture = newProduct.Picture,
+        //                    CategoryName = newProduct.Category.Name,
+        //                    HeadCategoryname = newProduct.Category.HeadCategory.Name
+
+        //                };
+
+        //            }
+        //        }
+        //    }
+        }
     }
 
    
-}

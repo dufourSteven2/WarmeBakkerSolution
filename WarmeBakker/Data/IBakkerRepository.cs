@@ -12,6 +12,9 @@ namespace WarmeBakker.Data
         IEnumerable<topicsContactForm> Getcontacttopics();
 
         IEnumerable<NewsMessages> GetNewsMessages();
-        
+
+        bool SaveAll();
+        void AddEntity(object model);
+
     }
 }
