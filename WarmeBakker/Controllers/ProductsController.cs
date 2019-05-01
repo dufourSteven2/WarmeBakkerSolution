@@ -178,7 +178,7 @@ namespace WarmeBakker.Controllers
             if (await TryUpdateModelAsync<Product>(
                 productToUpdate,
                 "",
-                s => s.Name, s => s.Description, s => s.Price, s => s.CategoryId))
+                s => s.Name, s => s.Description, s => s.Price, s => s.CategoryId ,s => s.Highlight))
             {
                 try
                 {

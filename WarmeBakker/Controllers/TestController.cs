@@ -10,70 +10,23 @@ using WarmeBakkerLib;
 
 namespace WarmeBakker.Controllers
 {
-    public class ProductenController : Controller
+    public class TestController : Controller
     {
         private readonly WarmeBakkerContext _context;
 
-        public ProductenController(WarmeBakkerContext context)
+        public TestController(WarmeBakkerContext context)
         {
             _context = context;
         }
 
-        // GET: Producten
-        public async Task<IActionResult> Index(string sortOrder, string currentFilter, string searchString, int? page)
+        // GET: Test
+        public async Task<IActionResult> Index()
         {
-            ViewData["CurrentSort"] = sortOrder;
-            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewData["PriceSortParm"] = sortOrder == "Price" ? "price_desc" : "Price";
-
-            if (searchString != null)
-            {
-                page = 1;
-            }
-            else
-            {
-                searchString = currentFilter;
-            }
-
-            ViewData["CurrentFilter"] = searchString;
-
-            var products = from s in _context.Products.Include(p => p.Category)
-                           select s;
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                products = products.Where(s => s.Category.Name.Contains(searchString));
-                //(s => s.Category.Name.Contains(searchString) ||s =>s.Price.Contains(searchstring)) //kan ook is dan extra filter
-            }
-
-            switch (sortOrder)
-            {
-                case "Order by Headcategory":
-                    products = products.OrderByDescending(p => p.Category.HeadCategory.HeadCategoryId);
-                    break;
-                case "Order by id":
-                    products = products.OrderByDescending(p => p.Category.Id);
-                    break;
-
-                //case "Price":
-                //    products = products.OrderBy(s => s.Price);
-                //    break;
-                //case "price_desc":
-                //    products = products.OrderByDescending(s => s.Price);
-                //    break;
-                //default:
-                //    products = products.OrderBy(s => s.Description);
-                //    break;
-            }
-            int pageSize = 15;
-            return View(await PaginatedList<Product>.CreateAsync(products.AsNoTracking().Include(p => p.Category.HeadCategory), page ?? 1, pageSize));
-
-            //return View(await products.AsNoTracking().ToListAsync());
-
-            //var warmeBakkerContext = _context.Products.Include(p => p.Category);
-            //return View(await warmeBakkerContext.ToListAsync());
+            var warmeBakkerContext = _context.Products.Include(p => p.Category);
+            return View(await warmeBakkerContext.ToListAsync());
         }
 
-        // GET: Producten/Details/5
+        // GET: Test/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -83,7 +36,6 @@ namespace WarmeBakker.Controllers
 
             var product = await _context.Products
                 .Include(p => p.Category)
-                .Include(p=> p.Category.HeadCategory)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (product == null)
             {
@@ -93,40 +45,31 @@ namespace WarmeBakker.Controllers
             return View(product);
         }
 
-        // GET: Producten/Create
+        // GET: Test/Create
         public IActionResult Create()
         {
             ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id");
-           
             return View();
         }
 
-        // POST: Producten/Create
+        // POST: Test/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Price,Description,Highlight,CategoryId")] Product product)
+        public async Task<IActionResult> Create([Bind("Id,Name,Price,Description,Highlight,Picture,CategoryId")] Product product)
         {
             if (ModelState.IsValid)
             {
-
-                int id = _context.Products.Count();
-
-      
-                    product.Id = ++id;
-                
-
                 _context.Add(product);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-           
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id", product.Category.Name);
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id", product.CategoryId);
             return View(product);
         }
 
-        // GET: Producten/Edit/5
+        // GET: Test/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -139,17 +82,19 @@ namespace WarmeBakker.Controllers
             {
                 return NotFound();
             }
+            //ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id", product.CategoryId);
+            //return View(product);
             ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id", product.CategoryId);
             PopulateCategoryDropDownList(product.CategoryId);
             return View(product);
         }
 
-        // POST: Producten/Edit/5
+        // POST: Test/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Price,Description,Highlight,CategoryId")] Product product)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Price,Description,Highlight,Picture,CategoryId")] Product product)
         {
             if (id != product.Id)
             {
@@ -176,12 +121,14 @@ namespace WarmeBakker.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            //ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id", product.CategoryId);
+            //return View(product);
             ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id", product.CategoryId);
             PopulateCategoryDropDownList(product.CategoryId);
             return View(product);
         }
 
-        // GET: Producten/Delete/5
+        // GET: Test/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -200,7 +147,7 @@ namespace WarmeBakker.Controllers
             return View(product);
         }
 
-        // POST: Producten/Delete/5
+        // POST: Test/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -215,8 +162,6 @@ namespace WarmeBakker.Controllers
         {
             return _context.Products.Any(e => e.Id == id);
         }
-
-
 
         private void PopulateCategoryDropDownList(object selectedCategory = null)
         {
