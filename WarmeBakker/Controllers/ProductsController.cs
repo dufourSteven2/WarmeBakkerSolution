@@ -126,6 +126,7 @@ namespace WarmeBakker.Controllers
                     "Try again, and if the problem persists " +
                     "see your system administrator.");
             }
+            
             PopulateCategoryDropDownList(product.CategoryId);
             //ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id", product.CategoryId);
             return View(product);
