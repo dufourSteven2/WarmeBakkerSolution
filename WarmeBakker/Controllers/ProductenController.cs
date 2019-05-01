@@ -238,8 +238,10 @@ namespace WarmeBakker.Controllers
         private void PopulateCategoryDropDownList(object selectedCategory = null)
         {
             var departmentsQuery = from d in _context.Categories
+                                   where(d.HeadCategory != null)
                                    orderby d.Id
                                    select d;
+            
             ViewBag.CategoryId = new SelectList(departmentsQuery, "Id", "Name", selectedCategory);
         }
 
