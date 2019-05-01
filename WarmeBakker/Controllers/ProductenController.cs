@@ -97,6 +97,7 @@ namespace WarmeBakker.Controllers
         public IActionResult Create()
         {
             ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id");
+           
             return View();
         }
 
@@ -109,10 +110,18 @@ namespace WarmeBakker.Controllers
         {
             if (ModelState.IsValid)
             {
+
+                int id = _context.Products.Count();
+
+      
+                    product.Id = ++id;
+                
+
                 _context.Add(product);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+           
             ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id", product.Category.Name);
             return View(product);
         }
@@ -131,6 +140,7 @@ namespace WarmeBakker.Controllers
                 return NotFound();
             }
             ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id", product.CategoryId);
+            PopulateCategoryDropDownList(product.CategoryId);
             return View(product);
         }
 
@@ -167,6 +177,7 @@ namespace WarmeBakker.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id", product.CategoryId);
+            PopulateCategoryDropDownList(product.CategoryId);
             return View(product);
         }
 
@@ -204,5 +215,16 @@ namespace WarmeBakker.Controllers
         {
             return _context.Products.Any(e => e.Id == id);
         }
+
+
+
+        private void PopulateCategoryDropDownList(object selectedCategory = null)
+        {
+            var departmentsQuery = from d in _context.Products
+                                   orderby d.Name
+                                   select d;
+            ViewBag.CategoryId = new SelectList(departmentsQuery, "CategoryId", "Name", selectedCategory);
+        }
+
     }
 }
