@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using WarmeBakker.Data;
+using WarmeBakker.Models;
 using WarmeBakkerLib;
 
 namespace WarmeBakker.Controllers
@@ -13,10 +16,16 @@ namespace WarmeBakker.Controllers
     public class ProductenController : Controller
     {
         private readonly WarmeBakkerContext _context;
+        private readonly IBakkerRepository _repository;
+        private readonly ILogger<ProductenController> _logger;
+        private readonly IMapper _mapper;
 
-        public ProductenController(WarmeBakkerContext context)
+        public ProductenController(WarmeBakkerContext context, IBakkerRepository repository, ILogger<ProductenController> logger, IMapper mapper)
         {
             _context = context;
+            _repository = repository;
+            _logger = logger;
+            _mapper = mapper;
         }
 
         // GET: Producten
@@ -74,59 +83,54 @@ namespace WarmeBakker.Controllers
         }
 
         // GET: Producten/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int id)
         {
-            if (id == null)
+
+            try
             {
-                return NotFound();
+                var product = _repository.GetProductById(id);
+                if (product != null) return View(_mapper.Map<Product, ProductDetailDTO>(product));
+                else return NotFound();
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Failed to get product: {ex}");
+                return BadRequest("Bad request");
+
             }
 
-            var product = await _context.Products
-                .Include(p => p.Category)
-                .Include(p=> p.Category.HeadCategory)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (product == null)
-            {
-                return NotFound();
-            }
-
-            return View(product);
         }
 
-        // GET: Producten/Create
+
+        // GET: Test/Create
         public IActionResult Create()
         {
             ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id");
-           
             return View();
         }
 
-        // POST: Producten/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // POST: Test/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Price,Description,Highlight,CategoryId")] Product product)
+        public async Task<IActionResult> Create([Bind("Id,Name,Price,Description,Highlight,Picture,CategoryId")] Product product)
         {
             if (ModelState.IsValid)
             {
-
-                int id = _context.Products.Count();
-
-      
-                    product.Id = ++id;
-                
-
                 _context.Add(product);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-           
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id", product.Category.Name);
+             ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id", product.CategoryId);
+
+            PopulateCategoryDropDownList(product.CategoryId);
             return View(product);
         }
 
-        // GET: Producten/Edit/5
+
+        // GET: Test/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -139,17 +143,18 @@ namespace WarmeBakker.Controllers
             {
                 return NotFound();
             }
+
             ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id", product.CategoryId);
             PopulateCategoryDropDownList(product.CategoryId);
             return View(product);
         }
 
-        // POST: Producten/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // POST: Test/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Price,Description,Highlight,CategoryId")] Product product)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Price,Description,Highlight,Picture,CategoryId")] Product product)
         {
             if (id != product.Id)
             {
@@ -177,9 +182,10 @@ namespace WarmeBakker.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id", product.CategoryId);
-            PopulateCategoryDropDownList(product.CategoryId);
             return View(product);
         }
+
+
 
         // GET: Producten/Delete/5
         public async Task<IActionResult> Delete(int? id)

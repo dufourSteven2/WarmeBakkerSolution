@@ -88,5 +88,22 @@ namespace WarmeBakker.Data
             }
 
         }
+
+        public void Create()
+        {
+
+        }
+
+
+        public bool SaveAll()
+        {
+            return _ctx.SaveChanges() > 0;
+        }
+
+        public void AddEntity(object model)
+        {
+            _ctx.Add(model);
+        }
+
     }
 }

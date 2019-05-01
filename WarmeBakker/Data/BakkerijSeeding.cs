@@ -26,9 +26,9 @@ namespace WarmeBakker.Data
            {
                 new Category{Name="Brood", Description="alle soorten brood.", Publication = true},
                 new Category{Name="Taarten", Description="alle soorten taarten.", Publication = true},
-                 new Category{Name="Boterkoeken", Description="alle soorten boterkoeken.", Publication = false},
-                  new Category{Name="Pistolets", Description="alle soorten pistolets.", Publication = false},
-                   new Category{Name="Pateetjes", Description="alle soorten pateetjes.", Publication = false}
+                 new Category{Name="Boterkoeken", Description="alle soorten boterkoeken.", Publication = true},
+                  new Category{Name="Pistolets", Description="alle soorten pistolets.", Publication = true},
+                   new Category{Name="Pateetjes", Description="alle soorten pateetjes.", Publication = true}
            };
                 foreach (Category c in headCategories)
                 {
