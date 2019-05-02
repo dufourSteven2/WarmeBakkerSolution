@@ -1,5 +1,5 @@
-﻿@model WarmeBakkerLib.Product
-
+﻿@*@model WarmeBakker.Models.ProductDetailDTO*@
+@model WarmeBakkerLib.Product
 @{
     ViewData["Title"] = "Create";
 }
@@ -41,7 +41,8 @@
             </div>
             <div class="form-group">
                 <label asp-for="CategoryId" class="control-label"></label>
-                <select asp-for="CategoryId" class ="form-control" asp-items="ViewBag.CategoryId"></select>
+                <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId"></select>
+                <span asp-validation-for="CategoryId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />

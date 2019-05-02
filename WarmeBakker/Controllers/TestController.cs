@@ -6,6 +6,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Logging;
 using WarmeBakker.Data;
 using WarmeBakker.Models;
@@ -107,6 +108,7 @@ namespace WarmeBakker.Controllers
         public IActionResult Create()
         {
             ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id");
+            PopulateCategoryDropDownList();
             return View();
         }
 
@@ -117,16 +119,47 @@ namespace WarmeBakker.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name,Price,Description,Highlight,Picture,CategoryId")] Product product)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _context.Add(product);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    _context.Products.Add(product);
+                    _context.SaveChanges();
+                    return RedirectToAction("Index");
+                }
             }
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id", product.CategoryId);
-
+            catch (RetryLimitExceededException /* dex */)
+            {
+                //Log the error (uncomment dex variable name and add a line here to write a log.)
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+            }
             PopulateCategoryDropDownList(product.CategoryId);
             return View(product);
+
+            //if (ModelState.IsValid)
+            //{
+            //    _context.Add(product);
+            //    await _context.SaveChangesAsync();
+            //    ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id", product.Category.Id); //product.CategoryId aangepast naar .Id
+
+            //    //PopulateCategoryDropDownList(product.Category.Id);
+            //    //return View(product);
+            //}
+            //ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id", product.Category.Id);
+
+            //PopulateCategoryDropDownList(product.Category.Id);
+            //return View(product);
+
+            ////if (ModelState.IsValid)
+            ////{
+            ////    _context.Add(product);
+            ////    await _context.SaveChangesAsync();
+            ////    return RedirectToAction(nameof(Index));
+            ////}
+            ////ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id", product.CategoryId);
+
+            ////PopulateCategoryDropDownList(product.CategoryId);
+            ////return View(product);
         }
 
 
