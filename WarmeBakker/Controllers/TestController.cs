@@ -28,7 +28,7 @@ namespace WarmeBakker.Controllers
             _logger = logger;
             _mapper = mapper;
         }
-
+        //
         // GET: Producten
         public async Task<IActionResult> Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
