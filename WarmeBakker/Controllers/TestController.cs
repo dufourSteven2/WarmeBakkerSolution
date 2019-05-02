@@ -136,30 +136,6 @@ namespace WarmeBakker.Controllers
             PopulateCategoryDropDownList(product.CategoryId);
             return View(product);
 
-            //if (ModelState.IsValid)
-            //{
-            //    _context.Add(product);
-            //    await _context.SaveChangesAsync();
-            //    ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id", product.Category.Id); //product.CategoryId aangepast naar .Id
-
-            //    //PopulateCategoryDropDownList(product.Category.Id);
-            //    //return View(product);
-            //}
-            //ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id", product.Category.Id);
-
-            //PopulateCategoryDropDownList(product.Category.Id);
-            //return View(product);
-
-            ////if (ModelState.IsValid)
-            ////{
-            ////    _context.Add(product);
-            ////    await _context.SaveChangesAsync();
-            ////    return RedirectToAction(nameof(Index));
-            ////}
-            ////ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id", product.CategoryId);
-
-            ////PopulateCategoryDropDownList(product.CategoryId);
-            ////return View(product);
         }
 
 
