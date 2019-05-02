@@ -106,7 +106,9 @@ namespace WarmeBakker.Controllers
         // GET: Test/Create
         public IActionResult Create()
         {
+           
             ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id");
+            PopulateCategoryDropDownList();
             return View();
         }
 
@@ -121,7 +123,9 @@ namespace WarmeBakker.Controllers
             {
                 _context.Add(product);
                 await _context.SaveChangesAsync();
-                ViewBag.UserMessage = "Product gewijzigd";
+                ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id", product.CategoryId);
+             
+                PopulateCategoryDropDownList(product.Category.Id);
                 return View(product);
             }
              ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id", product.CategoryId);
@@ -249,6 +253,16 @@ namespace WarmeBakker.Controllers
                                    select d;
             
             ViewBag.CategoryId = new SelectList(departmentsQuery, "Id", "Name", selectedCategory);
+        }
+
+        private void PopulateCategoryDropDownList()
+        {
+            var departmentsQuery = from d in _context.Categories
+                                   where (d.HeadCategory != null)
+                                   orderby d.Id
+                                   select d;
+
+            ViewBag.CategoryId = new SelectList(departmentsQuery, "Id", "Name");
         }
 
     }
