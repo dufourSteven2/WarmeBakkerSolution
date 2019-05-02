@@ -25,13 +25,14 @@
             </div>
             <div class="form-group">
                 <label asp-for="Onderwerp">Onderwerp:</label>
-                 <input type="text" asp-for="Onderwerp" class="form-control" />
-         
-                 <span asp-validation-for="Onderwerp" class="text-danger"></span>
+                <select asp-for="Onderwerp" class="form-control" asp-items="ViewBag.Onderwerp"></select>
+
+                <span asp-validation-for="Onderwerp" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Message">Bericht: </label>
-                <textarea rows="4" asp-for="Message" class="form-control"></textarea>
+                <input asp-for="Message" class="form-control" />
+
                 <span asp-validation-for="Message" class="text-danger"></span>
             </div>
             <div class="form-group">

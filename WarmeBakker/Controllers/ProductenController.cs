@@ -83,7 +83,7 @@ namespace WarmeBakker.Controllers
         }
 
         // GET: Producten/Details/5
-        public async Task<IActionResult> Details(int id)
+        public IActionResult Details(int id)
         {
 
             try
@@ -106,7 +106,9 @@ namespace WarmeBakker.Controllers
         // GET: Test/Create
         public IActionResult Create()
         {
+           
             ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id");
+            PopulateCategoryDropDownList();
             return View();
         }
 
@@ -121,7 +123,10 @@ namespace WarmeBakker.Controllers
             {
                 _context.Add(product);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id", product.CategoryId);
+             
+                PopulateCategoryDropDownList(product.Category.Id);
+                return View(product);
             }
              ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id", product.CategoryId);
 
@@ -131,26 +136,33 @@ namespace WarmeBakker.Controllers
 
 
         // GET: Test/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public  IActionResult Edit(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-            // hieronder aanpassing
-            //var product = await _context.Products
-            //    .Include(p => p.Category)
-            //    .FirstOrDefaultAsync(m => m.Id == id);
 
-            var product = await _context.Products.FindAsync(id);
-            if (product == null)
+            try
             {
-                return NotFound();
+                var product = _repository.GetProductById(id);
+                if (product != null)
+                {
+                   
+                    ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id", product.Category.Id);
+                    PopulateCategoryDropDownList(product.Category.Id);
+                    return View(_mapper.Map<Product, ProductDetailDTO>(product));
+                }
+                else return NotFound();
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Failed to get product: {ex}");
+                return BadRequest("Bad request");
+
             }
 
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id", product.CategoryId);
-            PopulateCategoryDropDownList(product.CategoryId);
-            return View(product);
+
+
+
+           // return View(product);
         }
 
         // POST: Test/Edit/5
@@ -183,10 +195,15 @@ namespace WarmeBakker.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id", product.CategoryId);
+                var product1 = _repository.GetProductById(id);
+                PopulateCategoryDropDownList(product1.Category.Id);
+                ViewBag.UserMessage = "Product gewijzigd";
+                return View();
             }
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id", product.Category.Name);
-            return View(product);
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id", product.CategoryId);
+            ViewBag.UserMessage = "Product gewijzigd";
+            return View();
         }
 
 
@@ -194,6 +211,7 @@ namespace WarmeBakker.Controllers
         // GET: Producten/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+
             if (id == null)
             {
                 return NotFound();
@@ -230,11 +248,22 @@ namespace WarmeBakker.Controllers
 
         private void PopulateCategoryDropDownList(object selectedCategory = null)
         {
-
-            var departmentsQuery = from d in _context.Products.Include( p => p.Category)
-                                   orderby d.Name
+            var departmentsQuery = from d in _context.Categories
+                                   where(d.HeadCategory != null)
+                                   orderby d.Id
                                    select d;
-            ViewBag.CategoryId = new SelectList(departmentsQuery, "CategoryId", "Name", selectedCategory);
+            
+            ViewBag.CategoryId = new SelectList(departmentsQuery, "Id", "Name", selectedCategory);
+        }
+
+        private void PopulateCategoryDropDownList()
+        {
+            var departmentsQuery = from d in _context.Categories
+                                   where (d.HeadCategory != null)
+                                   orderby d.Id
+                                   select d;
+
+            ViewBag.CategoryId = new SelectList(departmentsQuery, "Id", "Name");
         }
 
     }

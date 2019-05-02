@@ -133,7 +133,7 @@ namespace WarmeBakker.Controllers
         }
 
         // GET: Products/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(int? id)
         {
             if (id == null)
             {
@@ -144,6 +144,7 @@ namespace WarmeBakker.Controllers
             {
                 return NotFound();
             }
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id", product.Category.Name);
             PopulateCategoryDropDownList(product.CategoryId);
             return View(product);
 
@@ -228,10 +229,10 @@ namespace WarmeBakker.Controllers
 
         private void PopulateCategoryDropDownList(object selectedCategory = null)
         {
-            var departmentsQuery = from d in _context.Products
-                                   orderby d.Name
+            var departmentsQuery = from d in _context.Categories
+                                   orderby d.Id
                                    select d;
-            ViewBag.CategoryId = new SelectList(departmentsQuery, "CategoryId", "Name", selectedCategory);
+            ViewBag.CategoryId = new SelectList(departmentsQuery, "Id", "Name", selectedCategory);
         }
 
 
