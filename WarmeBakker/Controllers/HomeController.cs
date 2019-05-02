@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using WarmeBakker.Data;
 using WarmeBakker.ViewModels;
 using WarmeBakker.Services;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 //using WarmeBakker.Models.ProductViewModels.CategoryGroup;
 //using WarmeBakker.Models.ProductViewModels;
@@ -21,13 +22,15 @@ namespace WarmeBakker.Controllers
     {
         private readonly IMailService _mailService;
         private readonly IBakkerRepository _repository;
+        private readonly WarmeBakkerContext _ctx;
 
 
 
-        public HomeController (IBakkerRepository repository, IMailService mailService)
+        public HomeController (WarmeBakkerContext ctx, IBakkerRepository repository, IMailService mailService)
         {
             _mailService = mailService;
             _repository = repository;
+            _ctx = ctx;
         }
 
 
@@ -64,9 +67,20 @@ namespace WarmeBakker.Controllers
         [HttpGet("contact")]
         public IActionResult Contact()
         {
-            var contact = _repository.Getcontacttopics();
-            return View(contact);
+            ViewData["Onderwerp"] = new SelectList(_ctx.topicsContactforms, "Id", "Title");
+            PopulateTopicDropDownlist();
+            return View();
         }
+
+        private void PopulateTopicDropDownlist()
+        {
+            var departmentsQuery = from d in _ctx.topicsContactforms
+                                    orderby d.Id
+                                   select d;
+
+            ViewBag.CategoryId = new SelectList(departmentsQuery, "Id", "Title");
+        }
+
 
         [HttpPost("Contact")]
         public IActionResult Contact(ContactViewModels model)
