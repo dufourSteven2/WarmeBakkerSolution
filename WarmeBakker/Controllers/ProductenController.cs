@@ -121,7 +121,8 @@ namespace WarmeBakker.Controllers
             {
                 _context.Add(product);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                ViewBag.UserMessage = "Product gewijzigd";
+                return View(product);
             }
              ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id", product.CategoryId);
 
@@ -190,10 +191,15 @@ namespace WarmeBakker.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id", product.CategoryId);
+                var product1 = _repository.GetProductById(id);
+                PopulateCategoryDropDownList(product1.Category.Id);
+                ViewBag.UserMessage = "Product gewijzigd";
+                return View();
             }
             ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id", product.CategoryId);
-            return View(product);
+            ViewBag.UserMessage = "Product gewijzigd";
+            return View();
         }
 
 
