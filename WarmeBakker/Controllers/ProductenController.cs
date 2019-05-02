@@ -137,6 +137,10 @@ namespace WarmeBakker.Controllers
             {
                 return NotFound();
             }
+            // hieronder aanpassing
+            //var product = await _context.Products
+            //    .Include(p => p.Category)
+            //    .FirstOrDefaultAsync(m => m.Id == id);
 
             var product = await _context.Products.FindAsync(id);
             if (product == null)
@@ -181,7 +185,7 @@ namespace WarmeBakker.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id", product.CategoryId);
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id", product.Category.Name);
             return View(product);
         }
 
@@ -227,7 +231,7 @@ namespace WarmeBakker.Controllers
         private void PopulateCategoryDropDownList(object selectedCategory = null)
         {
 
-            var departmentsQuery = from d in _context.Products
+            var departmentsQuery = from d in _context.Products.Include( p => p.Category)
                                    orderby d.Name
                                    select d;
             ViewBag.CategoryId = new SelectList(departmentsQuery, "CategoryId", "Name", selectedCategory);

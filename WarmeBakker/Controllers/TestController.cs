@@ -20,10 +20,21 @@ namespace WarmeBakker.Controllers
         }
 
         // GET: Test
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? SelectedCategory)
         {
-            var warmeBakkerContext = _context.Products.Include(p => p.Category);
-            return View(await warmeBakkerContext.ToListAsync());
+            //var warmeBakkerContext = _context.Products.Include(p => p.Category);
+            //return View(await warmeBakkerContext.ToListAsync());
+
+            var categories = await _context.Categories.OrderBy(q => q.Name).ToListAsync();
+            ViewBag.SelectedCategory = new SelectList(categories, "CategoryId", "Name", SelectedCategory);
+            int categoryId = SelectedCategory.GetValueOrDefault();
+
+            IQueryable<Product> products = _context.Products
+                .Where(c => !SelectedCategory.HasValue || c.CategoryId == categoryId)
+                .OrderBy(d => d.Id)
+                .Include(d => d.Category);
+            var sql = products.ToString();
+            return View(await products.ToListAsync());
         }
 
         // GET: Test/Details/5
