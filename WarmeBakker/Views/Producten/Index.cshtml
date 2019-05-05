@@ -2,6 +2,7 @@
 @model PaginatedList<WarmeBakkerLib.Product>
 @{
     ViewData["Title"] = "Index";
+
 }
 
 <div>
@@ -30,91 +31,89 @@
     <div class="form-actions no-color">
         <p>
             Find by name: <input type="text" name="SearchString" value="@ViewData["currentFilter"]" />
-            <input type="submit" value="Search" class="btn btn-default" /> |
-            <a asp-action="Index">Back to Full List</a>
+            <input type="submit" value="Search" class="btn btn-info" />
+
+            <label class="control-label"></label>
+            Hoofd Categorie:
+            <select class=" left" asp-items="ViewBag.HeadCat" id="headCatList"></select>
+            Sub Categorie:
+
+
+
+            <a class="btn btn-link" asp-action="Index ">Back to Full List</a>
         </p>
     </div>
 </form>
 
 <div>
-    @foreach (var headcat in Model)
-    {
-        int ?i = headcat.Category.HeadCategoryId;
-
-        @if(i == headcat.Category.HeadCategoryId)
-        {
-            <h4>@headcat.Category.HeadCategory.Name</h4>
-
-            
-            
-        }
+    <h2>@ViewBag.Name</h2>
     }
 </div>
-    <table class="table">
-        <thead class="thead-dark">
-            <tr>
-                <th scope="col">
-                    Naam Product
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">
+                Naam Product
 
-                </th>
-                <th scope="col">
-                    Prijs product
-                </th>
-                <th scope="col">
-                    Omschrijving
+            </th>
+            <th scope="col">
+                Prijs product
+            </th>
+            <th scope="col">
+                Omschrijving
 
-                </th>
-                <th scope="col">
-                    HightLight
+            </th>
+            <th scope="col">
+                HightLight
 
-                </th>
-                <th scope="col">
-                    Category Name
+            </th>
+            <th scope="col">
+                Category Name
 
-                </th>
-                <th scope="col">
-                    Head Category Name
+            </th>
+            <th scope="col">
+                Head Category Name
 
-                </th>
-                <th scope="col">
-                    Acties
-                </th>
+            </th>
+            <th scope="col">
+                Acties
+            </th>
+        </tr>
+
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+
+
+            <tr itemscope>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Highlight)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category.HeadCategory.Name)
+                </td>
+                <td class="btn-group-lg">
+                    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                    <a class="btn btn-info" asp-action="Details" asp-route-id="@item.Id">Details</a>
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
             </tr>
-
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-
-
-                <tr itemscope>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Price)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Description)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Highlight)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Category.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Category.HeadCategory.Name)
-                    </td>
-                    <td class="btn-group-lg">
-                        <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                        <a class="btn btn-info" asp-action="Details" asp-route-id="@item.Id">Details</a>
-                        <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+        }
+    </tbody>
+</table>
 
 <p>
     <a class="btn btn-success" asp-action="Create">Create New</a>
@@ -139,3 +138,37 @@
    class="btn btn-default @nextDisabled">
     Next
 </a>
+<div>
+    <select asp-items="@ViewBag.HeadCat" id="headCatList">
+        <option>Select</option>
+    </select>
+</div>
+<div>
+    <select id="CategoryList"></select>
+</div>
+
+@section Scripts
+    {
+    <script type="text/javascript">
+        //Insert default item "Select" in dropdownlist on load
+        $(document).ready(function () {
+            var items = "<option value='0'>Select</option>";
+            $("#CategoryList").html(items);
+        });
+
+        //Bind City dropdownlist
+        $("#headCatList").change(function () {
+            var CategorieId = $("#CategoryList").val();
+            var url = "/Producten/GetdCategories";
+
+            $.getJSON(url, { CategorieId: CategorieId }, function (data) {
+                var item = "";
+                $("#CategoryList").empty();
+                $.each(data, function (i, Categorie) {
+                    item += '<option value="' + Categorie.value + '">' + Categorie.text + '</option>'
+                });
+                $("#CategoryList").html(item);
+            });
+        });
+    </script>
+}

@@ -49,18 +49,18 @@ namespace WarmeBakker.Controllers
 
             switch (sortOrder)
             {
-                case "name_desc":
-                    products = products.OrderByDescending(p => p.Category.Name);
+                case "head category":
+                    products = products.OrderByDescending(p => p.Category.HeadCategoryId);
                     break;
-                case "Price":
-                    products = products.OrderBy(s => s.Price);
+                case "category":
+                    products = products.OrderBy(s => s.CategoryId);
                     break;
-                case "price_desc":
-                    products = products.OrderByDescending(s => s.Price);
-                    break;
-                default:
-                    products = products.OrderBy(s => s.Description);
-                    break;
+                //case "price_desc":
+                //    products = products.OrderByDescending(s => s.Price);
+                //    break;
+                //default:
+                //    products = products.OrderBy(s => s.Description);
+                    //break;
             }
             int pageSize = 3;
             return View(await PaginatedList<Product>.CreateAsync(products.AsNoTracking(), page ?? 1, pageSize));

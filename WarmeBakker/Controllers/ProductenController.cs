@@ -6,6 +6,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Logging;
 using WarmeBakker.Data;
 using WarmeBakker.Models;
@@ -29,11 +30,28 @@ namespace WarmeBakker.Controllers
         }
 
         // GET: Producten
-        public async Task<IActionResult> Index(string sortOrder, string currentFilter, string searchString, int? page)
+        public async Task<IActionResult> Index(string sortOrder, string currentFilter, string searchString, int? page, int headId)
         {
             ViewData["CurrentSort"] = sortOrder;
             ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewData["PriceSortParm"] = sortOrder == "Price" ? "price_desc" : "Price";
+           
+
+            var products = from s in _context.Products.Include(p => p.Category).
+                           OrderBy(d => d.Category.HeadCategoryId).
+                           OrderBy(d => d.Category.id)
+                     select s;
+                           
+
+            switch (sortOrder)
+            {
+                case "Order by Headcategory":
+                    products = products.OrderBy(p => p.Category.HeadCategoryId);
+                    break;
+                case "Order by id":
+                    products = products.OrderBy(p => p.Category.Id);
+                    break;
+            }
 
             if (searchString != null)
             {
@@ -46,33 +64,19 @@ namespace WarmeBakker.Controllers
 
             ViewData["CurrentFilter"] = searchString;
 
-            var products = from s in _context.Products.Include(p => p.Category)
-                           select s;
+
+
+
             if (!String.IsNullOrEmpty(searchString))
             {
                 products = products.Where(s => s.Category.Name.Contains(searchString));
                 //(s => s.Category.Name.Contains(searchString) ||s =>s.Price.Contains(searchstring)) //kan ook is dan extra filter
             }
 
-            switch (sortOrder)
-            {
-                case "Order by Headcategory":
-                    products = products.OrderByDescending(p => p.Category.HeadCategory.HeadCategoryId);
-                    break;
-                case "Order by id":
-                    products = products.OrderByDescending(p => p.Category.Id);
-                    break;
 
-                //case "Price":
-                //    products = products.OrderBy(s => s.Price);
-                //    break;
-                //case "price_desc":
-                //    products = products.OrderByDescending(s => s.Price);
-                //    break;
-                //default:
-                //    products = products.OrderBy(s => s.Description);
-                //    break;
-            }
+
+            PopulateHeadCategoryDropDownList();
+            PopulateCategoryDropDownList();
             int pageSize = 15;
             return View(await PaginatedList<Product>.CreateAsync(products.AsNoTracking().Include(p => p.Category.HeadCategory), page ?? 1, pageSize));
 
@@ -89,7 +93,13 @@ namespace WarmeBakker.Controllers
             try
             {
                 var product = _repository.GetProductById(id);
-                if (product != null) return View(_mapper.Map<Product, ProductDetailDTO>(product));
+                if  (product != null)
+                {   GetHeadCategories();
+                    return View(_mapper.Map<Product, ProductDetailDTO>(product));
+                    
+                }
+
+
                 else return NotFound();
 
             }
@@ -101,12 +111,9 @@ namespace WarmeBakker.Controllers
             }
 
         }
-
-
         // GET: Test/Create
         public IActionResult Create()
         {
-           
             ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id");
             PopulateCategoryDropDownList();
             return View();
@@ -119,21 +126,24 @@ namespace WarmeBakker.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name,Price,Description,Highlight,Picture,CategoryId")] Product product)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _context.Add(product);
-                await _context.SaveChangesAsync();
-                ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id", product.CategoryId);
-             
-                PopulateCategoryDropDownList(product.Category.Id);
-                return View(product);
+                if (ModelState.IsValid)
+                {
+                    _context.Products.Add(product);
+                    _context.SaveChanges();
+                    return RedirectToAction("Index");
+                }
             }
-             ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id", product.CategoryId);
-
+            catch (RetryLimitExceededException /* dex */)
+            {
+                //Log the error (uncomment dex variable name and add a line here to write a log.)
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+            }
             PopulateCategoryDropDownList(product.CategoryId);
             return View(product);
-        }
 
+        }
 
         // GET: Test/Edit/5
         public  IActionResult Edit(int id)
@@ -244,6 +254,22 @@ namespace WarmeBakker.Controllers
             return _context.Products.Any(e => e.Id == id);
         }
 
+        private ActionResult GetHeadCategories()
+        {
+            var headcat = from d in _context.Categories
+                          where (d.HeadCategory == null)
+                          orderby d.Id
+                          select d;
+
+            return new JsonResult(headcat);
+        }
+
+        private JsonResult GetdCategories(int CategorieId)
+        {
+            var cat = new SelectList(_context.Categories.Where(c => c.HeadCategoryId == CategorieId), "Id", "Name");
+
+            return  Json(cat);
+        }
 
 
         private void PopulateCategoryDropDownList(object selectedCategory = null)
@@ -256,6 +282,17 @@ namespace WarmeBakker.Controllers
             ViewBag.CategoryId = new SelectList(departmentsQuery, "Id", "Name", selectedCategory);
         }
 
+        private void PopulateHeadCategoryDropDownList()
+        {
+            var headcat = from d in _context.Categories
+                      where (d.HeadCategory == null)
+                      orderby d.Id
+                      select d;
+
+            ViewBag.HeadCat = new SelectList(headcat, "Id", "Name");
+        }
+
+
         private void PopulateCategoryDropDownList()
         {
             var departmentsQuery = from d in _context.Categories
@@ -265,6 +302,8 @@ namespace WarmeBakker.Controllers
 
             ViewBag.CategoryId = new SelectList(departmentsQuery, "Id", "Name");
         }
+
+
 
     }
 }
