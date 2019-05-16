@@ -82,10 +82,10 @@ namespace WarmeBakker.Data
                 {
 
                     //all white bread
-            new Product{ Name = "Wit vierkant" , Price = 1.60m,Description = "Wit vierkant.",  CategoryId = 6, Highlight=false},
-            new Product{ Name = "Wit rond" , Price = 1.60m,Description = "Wit rond.",  CategoryId = 6, Highlight=false},
-            new Product{ Name = "Wit galet" , Price = 1.60m,Description = "Wit galet.",  CategoryId = 6, Highlight=false},
-            new Product{ Name = "Wit sesam" , Price = 1.75m,Description = "Wit sesam.",  CategoryId = 6, Highlight=false},
+            new Product{ Name = "Wit vierkant" , Price = 1.60m,Description = "Wit vierkant.", Picture ="Wit-vierkant.png", CategoryId = 6, Highlight=false},
+            new Product{ Name = "Wit rond" , Price = 1.60m,Description = "Wit rond.", Picture ="Wit-rond.png", CategoryId = 6, Highlight=false},
+            new Product{ Name = "Wit galet" , Price = 1.60m,Description = "Wit galet.", Picture ="Wit-galet.png",  CategoryId = 6, Highlight=false},
+            new Product{ Name = "Wit sesam" , Price = 1.75m,Description = "Wit sesam.", Picture ="Wit-sesam.png", CategoryId = 6, Highlight=false},
 
 
                     //all brown bread
