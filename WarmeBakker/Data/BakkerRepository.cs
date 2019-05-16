@@ -38,6 +38,20 @@ namespace WarmeBakker.Data
             }
         }
 
+        public IEnumerable<Category> GetAllCategories()
+        {
+            try
+            {
+                _logger.LogInformation("Get All Categroieen");
+                return _ctx.Categories.ToList();
+                    
+            }
+            catch(Exception ex)
+            {
+                _logger.LogError($"failed to get all Categories: {ex}");
+                return null;
+            }
+        }
 
 
         public IEnumerable<NewsMessages> GetNewsMessages()
