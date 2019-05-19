@@ -97,7 +97,6 @@
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
-                @*@Html.DisplayFor(modelItem => item.Picture)*@
                 @{
                     string imageUrl = item.Picture != null ?
                         "products/" + item.Picture : "default-product.png";
